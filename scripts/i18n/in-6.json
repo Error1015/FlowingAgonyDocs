@@ -1,0 +1,123 @@
+[
+  {
+    "id": "451586",
+    "zhName": "暴怒之灵",
+    "enName": "Outrageous Spirit",
+    "category": "rooted-resentment",
+    "slots": [
+      "sword",
+      "axe"
+    ],
+    "zhEffect": "你身上每有一种负面效果（包括着火），你的攻击力便会提升 1/2/3/4/5 点。",
+    "conflicts": []
+  },
+  {
+    "id": "451587",
+    "zhName": "恨比天高",
+    "enName": "Too Resentful to Die",
+    "category": "rooted-resentment",
+    "slots": [
+      "helmet"
+    ],
+    "zhEffect": "当你即将死亡时，你会回复4/7/10点生命值，并获得“极端憎恨Ⅰ”负面效果。当你身上存在“极端憎恨 Ⅰ”负面效果同时即将死亡时，你会回复3/5/7点生命值，并获得“极端憎恨 Ⅱ”负面效果。当你身上存在“极端憎恨 Ⅱ”负面效果同时即将死亡时，你会回复2/3/5点生命值，并获得“极端憎恨 Ⅲ”负面效果。当你身上存在“极端憎恨 Ⅲ”负面效果时，该附魔将失效。",
+    "conflicts": [
+      {
+        "zh": "怨恨深厚",
+        "en": "Deep Resentment"
+      }
+    ]
+  },
+  {
+    "id": "451588",
+    "zhName": "怨恨之灵",
+    "enName": "Resentful Soul",
+    "category": "rooted-resentment",
+    "slots": [
+      "helmet"
+    ],
+    "zhEffect": "只要刚攻击过你的怪物在你身边，你就永远不会死亡。该附魔“被攻击”判定时间为5s/7.5s/10s。",
+    "conflicts": [
+      {
+        "zh": "恨比天高",
+        "en": "Too Resentful to Die"
+      }
+    ]
+  },
+  {
+    "id": "451577",
+    "zhName": "以眼还眼",
+    "enName": "Vengeance",
+    "category": "lens-of-malice",
+    "slots": [
+      "helmet"
+    ],
+    "zhEffect": "任何攻击你的生物都会获得 9s“仇恨诅咒 (Cursed Hatred)”负面效果，负面效果强度将随附魔等级变化。",
+    "conflicts": [
+      {
+        "zh": "恶意感知",
+        "en": "Perceived Malice"
+      }
+    ]
+  },
+  {
+    "id": "451580",
+    "zhName": "恶意感知",
+    "enName": "Perceived Malice",
+    "category": "lens-of-malice",
+    "slots": [
+      "helmet"
+    ],
+    "zhEffect": ">=1.18 附魔效果：任何攻击你的生物会获得 10s “憎恶诅咒 (Cursed Antipathy)”负面效果，负面效果强度将随附魔等级变化。如果攻击者是玩家，那么他将会获得 10s“ 憎恶诅咒 (Cursed Antipathy) Ⅰ”负面效果和 10s [缓慢 (Slowness)]效果。\n\n<=1.17.1 附魔效果：你能感知到附近的怪物，任何攻击你的生物会获得 10s “憎恶诅咒 (Cursed Antipathy)”负面效果，负面效果强度将随附魔等级变化。如果攻击者是玩家，那么他将会获得 10s“ 憎恶诅咒 (Cursed Antipathy) Ⅰ”负面效果和 10s [缓慢 (Slowness)]效果。",
+    "conflicts": [
+      {
+        "zh": "以眼还眼",
+        "en": "Vengeance"
+      }
+    ]
+  },
+  {
+    "id": "451581",
+    "zhName": "恶意爆发",
+    "enName": "Malice Outbreak",
+    "category": "lens-of-malice",
+    "slots": [
+      "helmet"
+    ],
+    "zhEffect": "任何攻击你的生物将会被击飞，击飞方向等于你看向的方向，击飞力度为 0.4 * 附魔等级。",
+    "conflicts": []
+  },
+  {
+    "id": "451582",
+    "zhName": "恶念传染",
+    "enName": "Infectious Malice",
+    "category": "lens-of-malice",
+    "slots": [
+      "armor"
+    ],
+    "zhEffect": "每当你有一件护甲上有此附魔，你每次受到攻击时，攻击者会将携带的随机一种负面效果传播给周围的同类型生物。如果攻击者是玩家，那么他将会受到“10 x 携带该附魔装备数量”时长的“ 仇恨诅咒 Ⅲ”负面效果。",
+    "conflicts": []
+  },
+  {
+    "id": "451583",
+    "zhName": "找到你了",
+    "enName": "I See You Now",
+    "category": "lens-of-malice",
+    "slots": [
+      "helmet"
+    ],
+    "zhEffect": "大部分以你为目标的怪物+将会被高亮标记，罕有例外。",
+    "conflicts": []
+  },
+  {
+    "id": "469977",
+    "zhName": "见风使舵",
+    "enName": "Back and Fill",
+    "category": "lens-of-malice",
+    "slots": [
+      "bow",
+      "crossbow"
+    ],
+    "zhEffect": "攻击不以你为首要攻击目标的怪物造成伤害提升 2/3/4 点，攻击以你为首要攻击目标的怪物将施加 5s 的 10%/20%/30% 减速效果。",
+    "conflicts": []
+  }
+]

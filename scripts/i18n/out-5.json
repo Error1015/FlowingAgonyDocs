@@ -1,0 +1,42 @@
+[
+  {
+    "id": "451589",
+    "enEffect": "In locations with a light level below 5, you gain Night Vision; in locations with a light level above 5, you are immune to Blindness."
+  },
+  {
+    "id": "451590",
+    "enEffect": "Each time you gain an effect or an existing effect is refreshed, you gain 1/2/3 points of maximum health. The maximum health increase lasts 1 minute, up to a maximum of 30 points."
+  },
+  {
+    "id": "451591",
+    "enEffect": "The duration of beneficial effects you gain is increased by 100%.\nSynergy: [Prototype Chaotic] If you have the Prototype Chaotic enchantment equipped, the duration of beneficial effects you gain is increased by another 100%, and all negative effects you have that can be cured by milk are removed when you gain a beneficial effect."
+  },
+  {
+    "id": "451592",
+    "enEffect": "Attacks from common undead creatures are reduced by 60%/70%/80%/90%/100%, attacks from other undead creatures are reduced by 10%/20%/30%/40%/50%, and damage from the Wither is reduced by 0%/5%/10%/15%/20%. However, attacks from undead creatures have a 5%/4%/3%/2%/1% chance to trigger the “Curse of Undead” negative effect."
+  },
+  {
+    "id": "451593",
+    "enEffect": "You are immune to Poison, fall damage taken is reduced by 10%/15%/20%, explosion damage taken is reduced by 10%/15%/20%, and fire damage taken is reduced by 10%/15%/20%. When you are attacked, this enchantment indiscriminately releases the 6s “Lightburn Fungal Infection” negative effect around you, with a 25%/37.5%/50% chance to successfully inflict the negative effect."
+  },
+  {
+    "id": "451594",
+    "enEffect": "If another player dies near you, you will die along with them."
+  },
+  {
+    "id": "469978",
+    "enEffect": "The duration of all negative effects you receive is extended by 100%/90%/80%, damage taken is increased by 100%/90%/80%, up to a maximum of 10 points, but experience you gain is increased by 50%/65%/80%."
+  },
+  {
+    "id": "469979",
+    "enEffect": "Damage you deal is reduced by 4/3/2 points, but experience you gain is increased by 10%/15%/20%."
+  },
+  {
+    "id": "451584",
+    "enEffect": "Attacking a monster that has just attacked you increases your damage by 2/4/6 points for 10 seconds; this enchantment's “attack” detection window is 1.2/1.4/1.6s."
+  },
+  {
+    "id": "451585",
+    "enEffect": "For 40 seconds after you respawn, your movement speed is increased by 8.33%, attack damage is increased by 25%, and attack speed is increased by 8.33%. For every 1 level by which your armor's accumulated enchantment level is higher, this enchantment's effect is increased by 100%."
+  }
+]

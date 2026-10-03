@@ -1,0 +1,42 @@
+[
+  {
+    "id": "451610",
+    "enEffect": "When you kill witches and zombie villagers, nearby villagers' favor toward you increases by 1 point."
+  },
+  {
+    "id": "451611",
+    "enEffect": "Whenever you use this item to kill a villager, this item's repair penalty is reset to zero and 10 points of durability are restored."
+  },
+  {
+    "id": "451612",
+    "enEffect": "Killing a villager has a 10% * total enchantment level chance to drop 1 emerald and a 2% * total enchantment level chance to drop 1 gold ingot, and the \"Hero of the Village\" buff will no longer apply to you."
+  },
+  {
+    "id": "451613",
+    "enEffect": "Grants you a random-level, constantly refreshing \"Hero of the Village \" buff in the evening."
+  },
+  {
+    "id": "451616",
+    "enEffect": "When you land next to a villager, there is a certain chance to randomly steal 0-3 items from his trade list, but this can never exceed half the number of entries in the trade list. This enchantment performs three steal checks, each stealing one item; the higher the landing height, the greater the chance. When jumping down from a height of 5 blocks, the success rates are 30%|15%|5% respectively; when jumping down from a height of 15 blocks, the success rates are 80%|40%|20% respectively. Likewise, however, you have a minimum 30% and maximum 80% chance to deal 1-6 points of damage to the villager (the damage chance varies with landing height). If this enchantment effect takes place, each successful theft costs 30 points of boot durability."
+  },
+  {
+    "id": "469982",
+    "enEffect": ">=1.18.2:\nEffect: Mining stone and deepslate has a 1% chance to drop coal; level II adds a 0.5% chance to drop raw iron and raw copper; level III adds a 0.1% chance to drop raw gold and a 0.2% chance to drop redstone; level IV adds a 0.1% chance to drop lapis lazuli; level V adds a 0.1% chance to drop diamonds and emeralds.\nSynergy: [Silk Touch] the dropped ore becomes an ore block; [Fortune] the amount of ore dropped has a 50% chance to be doubled according to the Fortune level\n=1.17.1:\nEffect: Mining stone and deepslate has a 1% chance to drop coal; level II adds a 0.5% chance to drop raw iron and raw copper; level III adds a 0.1% chance to drop raw gold and a 0.2% chance to drop redstone; level IV adds a 0.1% chance to drop lapis lazuli; level V adds a 0.1% chance to drop diamonds and emeralds.\nSynergy: [Silk Touch] the dropped ore becomes an ore block; [Fortune] the amount of ore dropped has a 50% chance to be doubled\n<=1.16.5:\nEffect: Mining stone has a 1% chance to drop coal; level II adds a 0.5% chance to drop iron ore; level III adds a 0.1% chance to drop gold ore and a 0.2% chance to drop redstone; level IV adds a 0.1% chance to drop lapis lazuli; level V adds a 0.1% chance to drop diamonds and emeralds.\nSynergy: [Silk Touch] the dropped ore becomes an ore block; [Fortune] the amount of ore dropped has a 50% chance to be doubled"
+  },
+  {
+    "id": "469983",
+    "enEffect": "After killing a mob, each piece of droppable equipment it is wearing goes through a 15%/25%/35% drop check."
+  },
+  {
+    "id": "451605",
+    "enEffect": "When health drops below 4/5/6 points, movement speed gradually increases, up to 250%. Running, swimming and flying will clear the movement speed bonus."
+  },
+  {
+    "id": "451606",
+    "enEffect": "When you take an attack, the \"Levitation\" effect on you is automatically cancelled, and knockback against you is constantly reduced by 15%/30%."
+  },
+  {
+    "id": "451607",
+    "enEffect": "When you take an attack, the Slowness effect on you is automatically cancelled, and over the next 10s your movement speed increases by 15%/30% ."
+  }
+]

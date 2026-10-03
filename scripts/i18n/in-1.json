@@ -1,0 +1,170 @@
+[
+  {
+    "id": "451603",
+    "zhName": "莫里尔的死亡之愿",
+    "enName": "Morir's Deathwish",
+    "category": "last-wish",
+    "slots": [
+      "durable"
+    ],
+    "zhEffect": "每当你受到 1 点伤害，你穿戴或拿在手上的拥有该附魔的物品会回复 1-3 点耐久。你死亡后，拥有该附魔的物品会恢复 64 耐久，该效果有 10 分钟冷却时间。",
+    "conflicts": [
+      {
+        "zh": "莫里尔的生命链接",
+        "en": "Morir's Lifebound"
+      },
+      {
+        "zh": "盖登的遗憾",
+        "en": "Guiden's Regret"
+      },
+      {
+        "zh": "经验修补",
+        "en": "Mending"
+      }
+    ]
+  },
+  {
+    "id": "451604",
+    "zhName": "莫里尔的生命链接",
+    "enName": "Morir's Lifebound",
+    "category": "last-wish",
+    "slots": [
+      "durable"
+    ],
+    "zhEffect": "每当你恢复 1 点生命值，你穿戴或拿在手上的拥有该附魔的物品会回复 1-10 点耐久。你死亡后，拥有该附魔的物品会损失 32 耐久。",
+    "conflicts": [
+      {
+        "zh": "莫里尔的死亡之愿",
+        "en": "Morir's Deathwish"
+      },
+      {
+        "zh": "盖登的遗憾",
+        "en": "Guiden's Regret"
+      },
+      {
+        "zh": "经验修补",
+        "en": "Mending"
+      }
+    ]
+  },
+  {
+    "id": "469980",
+    "zhName": "盖登的遗憾",
+    "enName": "Guiden's Regret",
+    "category": "last-wish",
+    "slots": [
+      "durable"
+    ],
+    "zhEffect": "每当你杀死一个生物，你穿戴或拿在手上的拥有该附魔的物品会回复 1-3 点耐久。",
+    "conflicts": [
+      {
+        "zh": "莫里尔的生命链接",
+        "en": "Morir's Lifebound"
+      },
+      {
+        "zh": "莫里尔的死亡之愿",
+        "en": "Morir's Deathwish"
+      },
+      {
+        "zh": "经验修补",
+        "en": "Mending"
+      }
+    ]
+  },
+  {
+    "id": "469981",
+    "zhName": "最后的美梦",
+    "enName": "Last Sweet Dream",
+    "category": "last-wish",
+    "slots": [
+      "durable"
+    ],
+    "zhEffect": "当拥有该附魔的物品的耐久度低于10%时，将该物品丢出背包后其会消失，并会在下一次玩家睡醒后以满耐久回到玩家身边。一次只能生效于一件装备。先前扔掉的装备将会重新出现在玩家附近。",
+    "conflicts": []
+  },
+  {
+    "id": "451626",
+    "zhName": "善妒之人",
+    "enName": "Envious Kind",
+    "category": "flame-of-envy",
+    "slots": [
+      "chestplate"
+    ],
+    "zhEffect": "每次进攻时，如果攻击目标与自身生命值存在差距，那么自身将根据相差生命值获得一个对应等级的 10s 残暴妒者 (Envious Being) Buff，每 10 点生命值差距将会提高一级Buff，且高等级Buff会覆盖低等级Buff。",
+    "conflicts": []
+  },
+  {
+    "id": "451627",
+    "zhName": "眼中钉刺",
+    "enName": "Eyesore",
+    "category": "flame-of-envy",
+    "slots": [
+      "crossbow"
+    ],
+    "zhEffect": "箭矢将在3秒延迟后引爆，造成 3/5/7 点伤害，并对目标造成 3/4/5 s“失明 (Blindness)”负面效果与 3/4/5 s 的“缓慢 (Slowness)”负面效果。",
+    "conflicts": [
+      {
+        "zh": "肉中荆棘",
+        "en": "Thorn In Flesh"
+      }
+    ]
+  },
+  {
+    "id": "451628",
+    "zhName": "肉中荆棘",
+    "enName": "Thorn In Flesh",
+    "category": "flame-of-envy",
+    "slots": [
+      "crossbow"
+    ],
+    "zhEffect": "箭矢将对目标造成 5/7/9 秒的 50% 减速效果，在此期间，目标将因疼痛难忍而每隔2.5s停下一次脚步。如果目标是玩家，那么减速效果将变为 20%，停下脚步将变为造成 1 点荆棘伤害。",
+    "conflicts": [
+      {
+        "zh": "眼中钉刺",
+        "en": "Eyesore"
+      }
+    ]
+  },
+  {
+    "id": "451629",
+    "zhName": "暗箭难防",
+    "enName": "Covert Knife",
+    "category": "flame-of-envy",
+    "slots": [
+      "bow"
+    ],
+    "zhEffect": "末影人 (Enderman)有 50%/70%/100% 的概率无法成功躲避拥有该附魔的弓射出的箭矢。",
+    "conflicts": []
+  },
+  {
+    "id": "451630",
+    "zhName": "嫉妒之源",
+    "enName": "Source of Envy",
+    "category": "flame-of-envy",
+    "slots": [
+      "chestplate"
+    ],
+    "zhEffect": "攻击你的生物有会 20%/25%/30%/35%/40% 成为附近同类生物攻击的目标。如果攻击者是玩家，那么TA会有 10%/12%/14%/16%/18% 成为附近所有敌对生物攻击的目标。",
+    "conflicts": []
+  },
+  {
+    "id": "451620",
+    "zhName": "祈难人",
+    "enName": "Prayer of Pain",
+    "category": "agony-forged-soul",
+    "slots": [
+      "helmet"
+    ],
+    "zhEffect": "当血量低于6/8/10点时，每承受一次伤害，都会增加一层“苦难祈求”增益效果。",
+    "conflicts": [
+      {
+        "zh": "灼烧恐惧症",
+        "en": "Burning Phobia"
+      },
+      {
+        "zh": "溺亡恐惧症",
+        "en": "Drowning Phobia"
+      }
+    ]
+  }
+]

@@ -1,0 +1,135 @@
+[
+  {
+    "id": "451610",
+    "zhName": "常客计划",
+    "enName": "Regular Customer Program",
+    "category": "gloomy-era",
+    "slots": [
+      "sword",
+      "axe"
+    ],
+    "zhEffect": "当你杀死女巫和僵尸村民时，周围村民对你的好感度会上升1点。",
+    "conflicts": []
+  },
+  {
+    "id": "451611",
+    "zhName": "洗洗再用",
+    "enName": "Cleansing Before Using",
+    "category": "gloomy-era",
+    "slots": [
+      "durable"
+    ],
+    "zhEffect": "每当你使用该物品杀死村民时，该物品的修复惩罚将归零，同时回复10点耐久。",
+    "conflicts": []
+  },
+  {
+    "id": "451612",
+    "zhName": "脏钱",
+    "enName": "Dirty Money",
+    "category": "gloomy-era",
+    "slots": [
+      "armor"
+    ],
+    "zhEffect": "杀死村民有 10% * 总附魔等级 的概率会掉落 1 绿宝石与 2% * 总附魔等级 的概率会掉落 1 金锭，而“村庄英雄”增益效果将不对你生效。",
+    "conflicts": [
+      {
+        "zh": "切勿晚归",
+        "en": "Come Back at Dusk"
+      }
+    ]
+  },
+  {
+    "id": "451613",
+    "zhName": "切勿晚归",
+    "enName": "Come Back at Dusk",
+    "category": "gloomy-era",
+    "slots": [
+      "armor"
+    ],
+    "zhEffect": "使你在傍晚时刻拥有随即等级且不断刷新的“村庄英雄 ”增益效果。",
+    "conflicts": [
+      {
+        "zh": "脏钱",
+        "en": "Dirty Money"
+      }
+    ]
+  },
+  {
+    "id": "451616",
+    "zhName": "盗窃之典",
+    "enName": "Pilferage Creed",
+    "category": "gloomy-era",
+    "slots": [
+      "boots"
+    ],
+    "zhEffect": "当你落地在村民边上时，有一定概率随机从他交易列表里偷取0-3项物品，但最多不能超过交易列表条目数量的一半。该附魔会进行三次偷窃判定，每次判定会偷取一件物品，落地高度越高概率越大，从5格高位置跳下的成功率分别为为30%|15%|5%，从15格高位置跳下的成功率分别为80%|40%|20%。但同样的，你有最低30%，最高80%概率对村民造成1-6点伤害（伤害概率随落地高度变化）。该附魔效果如果生效，每次成功的偷盗将损耗鞋子耐久30点。",
+    "conflicts": []
+  },
+  {
+    "id": "469982",
+    "zhName": "精挑细选",
+    "enName": "Carefully Identified",
+    "category": "gloomy-era",
+    "slots": [
+      "pickaxe"
+    ],
+    "zhEffect": ">=1.18.2;\n附魔效果：挖掘石头与深板岩有1%的概率掉落煤炭，等级Ⅱ附加0.5%概率掉落粗铁与粗铜，等级Ⅲ附加0.1%概率掉落粗金与0.2%概率掉落红石，等级Ⅳ附加0.1%概率掉落青金石，等级Ⅴ附加0.1%概率掉落钻石与绿宝石。\n联动附魔：【精准采集 (Silk Touch)】掉落的矿石变为矿石块【时运 (Fortune)】掉落的矿石数量有50%的概率根据时运等级翻倍\n=1.17.1;\n附魔效果：挖掘石头与深板岩有1%的概率掉落煤炭，等级Ⅱ附加0.5%概率掉落粗铁与粗铜，等级Ⅲ附加0.1%概率掉落粗金与0.2%概率掉落红石，等级Ⅳ附加0.1%概率掉落青金石，等级Ⅴ附加0.1%概率掉落钻石与绿宝石。\n联动附魔：【精准采集 (Silk Touch)】掉落的矿石变为矿石块【时运 (Fortune)】掉落的矿石数量有50%的概率翻倍\n<=1.16.5:\n附魔效果：挖掘石头有1%的概率掉落煤炭，等级Ⅱ附加0.5%概率掉落铁矿石，等级Ⅲ附加0.1%概率掉落金矿石与0.2%概率掉落红石，等级Ⅳ附加0.1%概率掉落青金石，等级Ⅴ附加0.1%概率掉落钻石与绿宝石。\n联动附魔：【精准采集 (Silk Touch)】掉落的矿石变为矿石块【时运 (Fortune)】掉落的矿石数量有50%的概率翻倍",
+    "conflicts": []
+  },
+  {
+    "id": "469983",
+    "zhName": "巧手",
+    "enName": "Nimble Finger",
+    "category": "gloomy-era",
+    "slots": [
+      "sword",
+      "armor",
+      "mining-tool"
+    ],
+    "zhEffect": "击杀生物后，其穿着的每件可掉落装备都将过一次 15%/25%/35% 的掉落判定。",
+    "conflicts": []
+  },
+  {
+    "id": "451605",
+    "zhName": "潜能爆发",
+    "enName": "Potential Burst",
+    "category": "potential-unleashed",
+    "slots": [
+      "boots"
+    ],
+    "zhEffect": "血量降低至 4/5/6 点以下时移动速度会逐步提升，最高提升至250%。奔跑，游泳和飞行会导致移动速度加成被清除。",
+    "conflicts": []
+  },
+  {
+    "id": "451606",
+    "zhName": "固执步伐",
+    "enName": "Stubborn Step",
+    "category": "potential-unleashed",
+    "slots": [
+      "boots"
+    ],
+    "zhEffect": "当你受到攻击时，你身上“飘浮 (Levitation)”效果会被自动取消，对你的击退效果恒定削弱15%/30%。",
+    "conflicts": [
+      {
+        "zh": "轻浮步伐",
+        "en": "Frivolous Step"
+      }
+    ]
+  },
+  {
+    "id": "451607",
+    "zhName": "轻浮步伐",
+    "enName": "Frivolous Step",
+    "category": "potential-unleashed",
+    "slots": [
+      "boots"
+    ],
+    "zhEffect": "当你受到攻击时，你身上缓慢 (Slowness)效果会被自动取消，在接下来10s内你的移动速度将增加15%/30% 。",
+    "conflicts": [
+      {
+        "zh": "固执步伐",
+        "en": "Stubborn Step"
+      }
+    ]
+  }
+]

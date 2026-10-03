@@ -1,0 +1,437 @@
+/**
+ * Global shell: typography, navigation chrome, document surfaces.
+ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--fa-font-body);
+  font-feature-settings: 'kern' 1, 'liga' 1, 'cv05' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--fa-accent-soft);
+  color: var(--fa-text-strong);
+}
+
+/* ---------- scrollbars ---------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--fa-border-strong) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--fa-border-strong);
+  border: 3px solid transparent;
+  background-clip: content-box;
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fa-accent);
+  background-clip: content-box;
+}
+
+/* ---------- ambient background ---------- */
+.Layout::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(
+      760px circle at 12% -6%,
+      color-mix(in srgb, var(--fa-accent) 13%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(
+      620px circle at 92% 4%,
+      color-mix(in srgb, var(--fa-violet) 10%, transparent),
+      transparent 60%
+    );
+}
+
+/* subtle film grain so large flat areas do not look sterile */
+.Layout::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: var(--fa-grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.VPContent,
+.VPNav,
+.VPSidebar,
+.VPLocalNav,
+.VPFooter {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- navigation bar ---------- */
+.VPNav {
+  --vp-nav-bg-color: color-mix(in srgb, var(--vp-c-bg) 72%, transparent);
+}
+
+.VPNavBar {
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--fa-border) !important;
+}
+
+.VPNavBar:not(.has-title):not(.home.top) {
+  background: transparent;
+}
+
+.VPNavBarTitle .title {
+  font-family: var(--fa-font-display);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border-bottom: none !important;
+}
+
+.VPNavBarTitle .logo {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.VPNavBarTitle:hover .logo {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+.VPNavBarMenuLink {
+  font-weight: 500;
+}
+
+.VPNavBarMenuLink.active,
+.VPNavBarMenuLink:hover {
+  color: var(--vp-c-brand-1) !important;
+}
+
+/* thin gradient reading-progress accent under the nav */
+.VPNavBar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--fa-accent) 55%, transparent),
+    transparent
+  );
+  opacity: 0.7;
+}
+
+/* ---------- sidebar ---------- */
+.VPSidebar {
+  background: color-mix(in srgb, var(--vp-c-bg) 88%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-right: 1px solid var(--fa-border);
+}
+
+.VPSidebarItem.level-0 > .item > .text {
+  font-family: var(--fa-font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--fa-text-muted);
+}
+
+.VPSidebarItem .link:hover .text {
+  color: var(--vp-c-brand-1);
+}
+
+.VPSidebarItem.is-active > .item .link .text {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+.VPSidebarItem.is-active > .item .indicator {
+  background: linear-gradient(180deg, var(--fa-accent), var(--fa-violet));
+  width: 3px;
+  border-radius: 99px;
+}
+
+/* ---------- document typography ---------- */
+.vp-doc {
+  font-size: 15.5px;
+  line-height: 1.78;
+}
+
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4 {
+  font-family: var(--fa-font-display);
+  letter-spacing: -0.005em;
+  color: var(--fa-text-strong);
+}
+
+.vp-doc h1 {
+  font-size: 2.1rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.vp-doc h2 {
+  margin-top: 3.25rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--fa-border);
+  font-size: 1.55rem;
+  font-weight: 600;
+}
+
+.vp-doc h3 {
+  margin-top: 2.2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.vp-doc p,
+.vp-doc li {
+  color: var(--fa-text);
+}
+
+.vp-doc a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 35%, transparent);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.vp-doc a:hover {
+  border-bottom-color: var(--vp-c-brand-1);
+}
+
+.vp-doc strong {
+  color: var(--fa-text-strong);
+  font-weight: 650;
+}
+
+.vp-doc hr {
+  border-top: 1px solid var(--fa-border);
+}
+
+.vp-doc blockquote {
+  border-left: 3px solid color-mix(in srgb, var(--fa-accent) 55%, transparent);
+  background: var(--fa-surface-2);
+  border-radius: 0 var(--fa-radius-sm) var(--fa-radius-sm) 0;
+  padding: 0.35rem 1.1rem;
+  color: var(--fa-text);
+}
+
+.vp-doc blockquote > p {
+  color: var(--fa-text);
+}
+
+.vp-doc :not(pre) > code {
+  background: var(--fa-accent-soft);
+  color: var(--vp-c-brand-1);
+  border-radius: 5px;
+  padding: 0.16em 0.42em;
+  font-size: 0.86em;
+  font-weight: 500;
+}
+
+.vp-doc table {
+  display: table;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--fa-border);
+  border-radius: var(--fa-radius);
+  overflow: hidden;
+  font-size: 14.5px;
+}
+
+.vp-doc th {
+  background: var(--fa-surface-3);
+  font-family: var(--fa-font-display);
+  font-weight: 600;
+  color: var(--fa-text-strong);
+  letter-spacing: 0.01em;
+}
+
+.vp-doc th,
+.vp-doc td {
+  border: none;
+  border-bottom: 1px solid var(--fa-border);
+  padding: 0.7rem 0.95rem;
+}
+
+.vp-doc tr:last-child td {
+  border-bottom: none;
+}
+
+.vp-doc tr:hover td {
+  background: var(--fa-surface-2);
+}
+
+/* ---------- custom blocks ---------- */
+.vp-doc .custom-block {
+  border: 1px solid var(--fa-border);
+  border-left-width: 3px;
+  border-radius: var(--fa-radius-sm);
+  font-size: 14.5px;
+}
+
+.vp-doc .custom-block .custom-block-title {
+  font-family: var(--fa-font-display);
+  letter-spacing: 0.02em;
+}
+
+.vp-doc .custom-block.tip {
+  border-left-color: var(--fa-accent);
+}
+
+.vp-doc .custom-block.warning {
+  border-left-color: var(--fa-ember);
+}
+
+.vp-doc .custom-block.danger {
+  border-left-color: var(--fa-crimson-500);
+}
+
+.vp-doc .custom-block.info {
+  border-left-color: var(--fa-violet);
+}
+
+/* ---------- outline ---------- */
+.VPDocOutlineItem a.outline-link {
+  transition: color 0.2s ease;
+}
+
+.VPDocOutlineItem a.outline-link.active {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+.VPDocOutlineItem .outline-marker {
+  background: linear-gradient(180deg, var(--fa-accent), var(--fa-violet));
+}
+
+/* ---------- footer ---------- */
+.VPFooter {
+  border-top: 1px solid var(--fa-border);
+  background: var(--fa-surface-2);
+}
+
+.VPFooter .message,
+.VPFooter .copyright {
+  font-size: 13px;
+  color: var(--fa-text-muted);
+}
+
+/* ---------- prev / next pager ---------- */
+.VPDocFooter .pager-link {
+  border: 1px solid var(--fa-border);
+  border-radius: var(--fa-radius);
+  background: var(--fa-surface-2);
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.VPDocFooter .pager-link:hover {
+  border-color: color-mix(in srgb, var(--fa-accent) 55%, transparent);
+  transform: translateY(-2px);
+  box-shadow: var(--fa-shadow);
+}
+
+.VPDocFooter .pager-link .title {
+  font-family: var(--fa-font-display);
+  color: var(--vp-c-brand-1);
+}
+
+/* ---------- local search ---------- */
+.VPLocalSearchBox .shell {
+  border: 1px solid var(--fa-border-strong);
+  border-radius: var(--fa-radius);
+  box-shadow: var(--fa-shadow-lg);
+  background: var(--fa-surface);
+}
+
+.VPLocalSearchBox .search-bar {
+  border-bottom: 1px solid var(--fa-border);
+}
+
+.VPLocalSearchBox .result {
+  border: 1px solid transparent;
+  border-radius: var(--fa-radius-sm);
+}
+
+.VPLocalSearchBox .result.selected {
+  border-color: color-mix(in srgb, var(--fa-accent) 45%, transparent);
+  background: var(--fa-accent-soft);
+}
+
+/* ---------- language switcher ---------- */
+.VPNavBarTranslations .VPMenu {
+  border: 1px solid var(--fa-border-strong);
+  border-radius: var(--fa-radius);
+  box-shadow: var(--fa-shadow-lg);
+}
+
+.VPNavBarTranslations .VPMenuLink a {
+  border-radius: var(--fa-radius-sm);
+}
+
+/* ---------- document column ----------
+ * Pages that opt out of the outline (`aside: false`) are the card-driven
+ * reference pages, so they get a much wider column than prose pages.
+ */
+.VPDoc:not(.has-aside) .content-container {
+  max-width: 1200px;
+}
+
+.VPDoc:not(.has-aside) .container {
+  max-width: none;
+}
+
+/* ---------- full-bleed custom pages (home, etc.) ---------- */
+.fa-home-page .VPContent {
+  padding-top: var(--vp-nav-height);
+}
+
+.fa-home-page .VPPage {
+  max-width: none;
+  padding: 0;
+}
+
+.fa-home-page .VPFooter {
+  margin-top: 0;
+}
+
+/* ---------- accessibility ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

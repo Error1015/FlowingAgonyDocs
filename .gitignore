@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+
+# build output
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# local env
+.env
+.env.local
+
+# local preview screenshots produced by scripts/dev/screenshot.mjs
+shots/

@@ -1,0 +1,117 @@
+{
+  "effects": [
+    {
+      "id": "cursed_hatred",
+      "zhName": "仇恨诅咒",
+      "enName": "Cursed Hatred",
+      "kind": "debuff",
+      "zhDesc": "在受到攻击时，将额外受到仇恨伤害。",
+      "enDesc": "Greatly strengthens the damage inflicted on one.",
+      "source": "vengeance"
+    },
+    {
+      "id": "cursed_antipathy",
+      "zhName": "憎恶诅咒",
+      "enName": "Cursed Antipathy",
+      "kind": "debuff",
+      "zhDesc": "承受无视护甲的憎恶伤害。",
+      "enDesc": "Causes antipathy damage which ignores armor to target.",
+      "source": "perceived-malice"
+    },
+    {
+      "id": "extreme_hatred",
+      "zhName": "极端憎恨",
+      "enName": "Extreme Hatred",
+      "kind": "debuff",
+      "zhDesc": "持续损耗饥饿值的同时巨幅增加输出伤害。",
+      "enDesc": "Tremendously increases attack damage but consumes more hunger points at pretty fast rate. Lasts until you kill a creature.",
+      "source": "too-resentful-to-die",
+      "stages": ["Ⅰ", "Ⅱ", "Ⅲ"]
+    },
+    {
+      "id": "agony_resonance",
+      "zhName": "苦痛共鸣",
+      "enName": "Agony Resonance",
+      "kind": "debuff",
+      "zhDesc": "为附近所有生物施加“被共鸣（苦痛共鸣）”效果。",
+      "enDesc": "Imposes the status effect \"Been Resonated\" on all the nearby mobs.",
+      "source": "agony-screamer"
+    },
+    {
+      "id": "been_resonated",
+      "zhName": "被共鸣（苦痛共鸣）",
+      "enName": "Been Resonated",
+      "kind": "debuff",
+      "zhDesc": "每当你承受一次伤害，附近拥有“被共鸣（苦痛共鸣）”负面效果的生物会承受/共鸣伤害。",
+      "enDesc": "Causes damage as you took to all the nearby creatures who are in the debuff \"Agony Resonance\".",
+      "source": "agony-screamer"
+    },
+    {
+      "id": "let_me_savor_it",
+      "zhName": "苦难祈求",
+      "enName": "Let Me Savor It!",
+      "kind": "debuff",
+      "zhDesc": "你的攻击力将下降。但是你受到攻击后，攻击者会受到伤害。血量高于12点后，该Buff将直接消失。",
+      "enDesc": "Decreases your attack damage and instead gives the attacker a certain damage. This buff will vanish once your hearts are higher than 12.",
+      "source": "prayer-of-pain"
+    },
+    {
+      "id": "listen_to_me_singing",
+      "zhName": "听我歌唱！",
+      "enName": "Listen to Me Singing!",
+      "kind": "debuff",
+      "zhDesc": "受害者将被反复强制提起再朝着空气墙砸下。",
+      "enDesc": "The victim will be repeatedly forcibly lifted and then smashed towards the ground.",
+      "source": "insane-poet"
+    },
+    {
+      "id": "curse_of_undead",
+      "zhName": "亡灵诅咒",
+      "enName": "Curse of Undead",
+      "kind": "debuff",
+      "zhDesc": "你会变得和僵尸一样在太阳下燃烧！因此你必须戴头盔来遮挡阳光。火焰伤害将提高 1 倍，且火焰伤害会导致头盔损坏。喝牛奶无法治愈该负面效果，吃附魔金苹果或死亡方可治愈该负面效果。该状态下吃腐肉将恢复 1 点生命值并给予 3s 力量效果。",
+      "enDesc": "You burn like a zombie under daylight! A helmet is necessary to block the damage. Largely increases the damage of fire and enables fire to cause damage on helmets. Rather than milk, the debuff can only be removed by enchanted golden apples or death. No more negative effects of hunger under this debuff and you can restore 1 hearts and obtain 3 seconds of buff \"Strength Ⅰ\" by eating rotten meat.",
+      "source": "corrupted-kindred"
+    },
+    {
+      "id": "lightburn_fungal_infection",
+      "zhName": "光蚀真菌感染",
+      "enName": "Lightburn Fungal Infection",
+      "kind": "debuff",
+      "zhDesc": "受到光蚀真菌感染伤害。拥有光蚀真菌寄生附魔的玩家将免疫该负面效果。",
+      "enDesc": "Causes lightburn fungal infection damage. Players with the enchantment \"Lightburn Fungal Parasitic\" are free from this effect.",
+      "source": "lightburn-fungal-parasitic"
+    },
+    {
+      "id": "envious_being",
+      "zhName": "残暴妒者",
+      "enName": "Envious Being",
+      "kind": "buff",
+      "zhDesc": "攻击力上升。",
+      "enDesc": "Increases attack damage.",
+      "source": "envious-kind"
+    }
+  ],
+  "markerEffects": {
+    "zhName": "无法辨识的效果",
+    "enName": "Unidentifiable Status Effect",
+    "zhDesc": "模组内部用于承载附魔状态的一类隐藏效果，玩家在游戏内只会看到该统一名称。它们不直接造成伤害，仅作为附魔逻辑的开关与计时器使用。",
+    "enDesc": "A family of hidden internal effects that carry the enchantment state. In game they all share this single name. They deal no damage on their own and merely act as switches and timers for enchantment logic.",
+    "list": [
+      "back_and_fill_enchantment_active",
+      "potential_burst_enchantment_active",
+      "frivolous_step_enchantment_active",
+      "hatred_bloodline_enchantment_active",
+      "fresh_revenge_enchantment_active",
+      "prototype_chaotic_enchantment_active",
+      "insane_poet_enchantment_active",
+      "miraculous_escape_enchantment_active",
+      "miraculous_escape_enchantment_force_escape",
+      "paper_brain_enchantment_active",
+      "shock_therapy_enchantment_active",
+      "thorn_in_flesh_active",
+      "thorn_in_flesh_active_for_player",
+      "eyesore_enchantment_active"
+    ]
+  }
+}

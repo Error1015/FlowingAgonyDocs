@@ -1,0 +1,123 @@
+[
+  {
+    "id": "451589",
+    "zhName": "生于暗影",
+    "enName": "Shadowborn",
+    "category": "erroneous-existence",
+    "slots": [
+      "helmet"
+    ],
+    "zhEffect": "在亮度低于5的位置你将获得夜视效果，在亮度高于5的位置你将免疫失明效果。",
+    "conflicts": []
+  },
+  {
+    "id": "451590",
+    "zhName": "混乱原体",
+    "enName": "Prototype Chaotic",
+    "category": "erroneous-existence",
+    "slots": [
+      "chestplate"
+    ],
+    "zhEffect": "你每获得一种效果或已有效果被刷新，便会获得 1/2/3 点生命值上限。生命值上限提升持续 1 分钟，上限为30点。",
+    "conflicts": []
+  },
+  {
+    "id": "451591",
+    "zhName": "混乱原体β型",
+    "enName": "Prototype Chaotic Type β",
+    "category": "erroneous-existence",
+    "slots": [
+      "chestplate"
+    ],
+    "zhEffect": "你获得的增益效果持续时间将增加100%。\n联动附魔：【混乱原体】如果你装备上拥有混乱原体附魔，那么你获得的增益状态持续时间再次增加100%，你拥有的所有可被牛奶治愈的负面效果将在获得增益效果时被移除。",
+    "conflicts": []
+  },
+  {
+    "id": "451592",
+    "zhName": "腐败血脉",
+    "enName": "Corrupted Kindred",
+    "category": "erroneous-existence",
+    "slots": [
+      "chestplate"
+    ],
+    "zhEffect": "来自常见亡灵类生物的攻击将削弱 60%/70%/80%/90%/100%，来自其他亡灵生物的攻击将被削弱 10%/20%/30%/40%/50%，来自凋零的伤害将被削弱 0%/5%/10%/15%/20%。但亡灵类生物的攻击会有 5%/4%/3%/2%/1% 几率触发“亡灵诅咒 (Curse of Undead)”负面效果。",
+    "conflicts": []
+  },
+  {
+    "id": "451593",
+    "zhName": "光蚀真菌寄生",
+    "enName": "Lightburn Fungal Parasitic",
+    "category": "erroneous-existence",
+    "slots": [
+      "chestplate"
+    ],
+    "zhEffect": "你免疫中毒 (Poison)效果，受到的跌落伤害降低10%/15%/20%，受到的爆炸伤害降低10%/15%/20%，受到的火焰伤害降低10%/15%/20%。当你被攻击时，该附魔将朝周围无差别释放6s“光蚀真菌感染 (Lightburn Fungal Infection)”负面效果，感染负面效果成功率为25%/37.5%/50%。",
+    "conflicts": []
+  },
+  {
+    "id": "451594",
+    "zhName": "陪葬者",
+    "enName": "Burial Object",
+    "category": "erroneous-existence",
+    "slots": [
+      "armor"
+    ],
+    "zhEffect": "如果你周围有其他玩家死亡，你将会和他一同死去。",
+    "conflicts": []
+  },
+  {
+    "id": "469978",
+    "zhName": "原罪学者",
+    "enName": "Scholar of Original Sin",
+    "category": "erroneous-existence",
+    "slots": [
+      "chestplate"
+    ],
+    "zhEffect": "你受到的所有负面效果都将延长 100%/90%/80% 持续时间，受到的伤害将增加 100%/90%/80%，上限为10点，但你获取的经验值将提升 50%/65%/80%。",
+    "conflicts": [
+      {
+        "zh": "原罪侵蚀",
+        "en": "Original Sin Erosion"
+      }
+    ]
+  },
+  {
+    "id": "469979",
+    "zhName": "原罪侵蚀",
+    "enName": "Original Sin Erosion",
+    "category": "erroneous-existence",
+    "slots": [
+      "chestplate"
+    ],
+    "zhEffect": "你造成的伤害降低 4/3/2 点，但你获取的经验值将提升 10%/15%/20%。",
+    "conflicts": [
+      {
+        "zh": "原罪学者",
+        "en": "Scholar of Original Sin"
+      }
+    ]
+  },
+  {
+    "id": "451584",
+    "zhName": "仇不隔夜",
+    "enName": "Fresh Revenge",
+    "category": "rooted-resentment",
+    "slots": [
+      "sword",
+      "axe"
+    ],
+    "zhEffect": "攻击刚攻击过你的怪物，你的伤害将在10秒内提升 2/4/6 点，该附魔“攻击”判定时间为 1.2/1.4/1.6s。",
+    "conflicts": []
+  },
+  {
+    "id": "451585",
+    "zhName": "怨恨血脉",
+    "enName": "Hatred Bloodline",
+    "category": "rooted-resentment",
+    "slots": [
+      "armor"
+    ],
+    "zhEffect": "在你复活后的40秒内你的移动速度提升8.33%，攻击伤害将提升25%，攻击速度将提升8.33%。你护甲上的累计附魔等级高1级，该附魔效果提升100%。",
+    "conflicts": []
+  }
+]

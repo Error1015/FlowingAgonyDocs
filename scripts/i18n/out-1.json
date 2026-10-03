@@ -1,0 +1,42 @@
+[
+  {
+    "id": "451603",
+    "enEffect": "Whenever you take 1 point of damage, items you are wearing or holding that have this enchantment restore 1-3 points of durability. After you die, items with this enchantment restore 64 durability; this effect has a 10-minute cooldown."
+  },
+  {
+    "id": "451604",
+    "enEffect": "Whenever you restore 1 point of health, items you are wearing or holding that have this enchantment restore 1-10 points of durability. After you die, items with this enchantment lose 32 durability."
+  },
+  {
+    "id": "469980",
+    "enEffect": "Whenever you kill a creature, items you are wearing or holding that have this enchantment restore 1-3 points of durability."
+  },
+  {
+    "id": "469981",
+    "enEffect": "When an item with this enchantment falls below 10% durability, throwing it out of your inventory makes it disappear, and it will return to the player at full durability after the player next wakes from sleep. Only one piece of equipment can be affected at a time. Previously discarded equipment will reappear near the player."
+  },
+  {
+    "id": "451626",
+    "enEffect": "Each time you attack, if there is a health difference between the target and yourself, you gain a 10s Envious Being buff of a tier corresponding to the health difference; every 10 points of health difference raises the buff by one tier, and a higher-tier buff overrides a lower-tier buff."
+  },
+  {
+    "id": "451627",
+    "enEffect": "The arrow detonates after a 3-second delay, dealing 3/5/7 points of damage and inflicting Blindness for 3/4/5 s and Slowness for 3/4/5 s on the target."
+  },
+  {
+    "id": "451628",
+    "enEffect": "The arrow inflicts a 50% slowdown on the target for 5/7/9 seconds; during this time, the target stops in place once every 2.5s from unbearable pain. If the target is a player, the slowdown becomes 20% and the stop in place becomes 1 point of thorns damage."
+  },
+  {
+    "id": "451629",
+    "enEffect": "An Enderman has a 50%/70%/100% chance to fail to dodge arrows fired from a bow with this enchantment."
+  },
+  {
+    "id": "451630",
+    "enEffect": "Creatures that attack you have a 20%/25%/30%/35%/40% chance to become the attack target of nearby creatures of the same kind. If the attacker is a player, they have a 10%/12%/14%/16%/18% chance to become the attack target of all nearby hostile creatures."
+  },
+  {
+    "id": "451620",
+    "enEffect": "When health is below 6/8/10 points, each time you take damage you gain one stack of the Suffering Prayer buff."
+  }
+]

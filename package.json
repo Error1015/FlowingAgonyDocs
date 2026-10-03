@@ -1,0 +1,17 @@
+{
+  "name": "flowing-agony-reborn-docs",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Bilingual documentation site for MarbleGate's Exotic Enchantment: Flowing Agony: Reborn",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs",
+    "data:split": "node scripts/split-i18n.mjs 6",
+    "data:build": "node scripts/build-data.mjs"
+  },
+  "devDependencies": {
+    "vitepress": "^2.0.0-alpha.20"
+  }
+}

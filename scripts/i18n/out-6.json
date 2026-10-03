@@ -1,0 +1,38 @@
+[
+  {
+    "id": "451586",
+    "enEffect": "For each negative effect on you (including being on fire), your attack damage is increased by 1/2/3/4/5 points."
+  },
+  {
+    "id": "451587",
+    "enEffect": "When you are about to die, you restore 4/7/10 points of health and gain the \"Extreme Hatred I\" negative effect. When you have the \"Extreme Hatred I\" negative effect and are about to die, you restore 3/5/7 points of health and gain the \"Extreme Hatred II\" negative effect. When you have the \"Extreme Hatred II\" negative effect and are about to die, you restore 2/3/5 points of health and gain the \"Extreme Hatred III\" negative effect. When you have the \"Extreme Hatred III\" negative effect, this enchantment becomes ineffective."
+  },
+  {
+    "id": "451588",
+    "enEffect": "As long as a mob that has just attacked you is near you, you will never die. This enchantment's \"attacked\" detection time is 5s/7.5s/10s."
+  },
+  {
+    "id": "451577",
+    "enEffect": "Any creature that attacks you gains the 9s \"Cursed Hatred\" negative effect, and the strength of the negative effect varies with the enchantment level."
+  },
+  {
+    "id": "451580",
+    "enEffect": ">=1.18:\nAny creature that attacks you gains the 10s \"Cursed Antipathy\" negative effect, and the strength of the negative effect varies with the enchantment level. If the attacker is a player, they will gain the 10s \"Cursed Antipathy I\" negative effect and the 10s [Slowness] effect.\n\n<=1.17.1:\nYou can sense nearby mobs. Any creature that attacks you gains the 10s \"Cursed Antipathy\" negative effect, and the strength of the negative effect varies with the enchantment level. If the attacker is a player, they will gain the 10s \"Cursed Antipathy I\" negative effect and the 10s [Slowness] effect."
+  },
+  {
+    "id": "451581",
+    "enEffect": "Any creature that attacks you will be knocked back; the knockback direction equals the direction you are looking, and the knockback force is 0.4 * enchantment level."
+  },
+  {
+    "id": "451582",
+    "enEffect": "For each piece of armor you have with this enchantment, whenever you take a hit, the attacker will spread one random negative effect they are carrying to nearby creatures of the same type. If the attacker is a player, they will receive the \"Cursed Hatred III\" negative effect for a duration of \"10 x number of equipped items with this enchantment\"."
+  },
+  {
+    "id": "451583",
+    "enEffect": "Most mobs that target you will be highlighted, with rare exceptions."
+  },
+  {
+    "id": "469977",
+    "enEffect": "Attacks on mobs that do not have you as their primary target deal 2/3/4 more damage, and attacks on mobs that have you as their primary target apply a 5s 10%/20%/30% slowing effect."
+  }
+]

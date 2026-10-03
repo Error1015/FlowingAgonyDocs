@@ -1,0 +1,42 @@
+[
+  {
+    "id": "451608",
+    "enEffect": "When you take damage and your health before taking that damage is not higher than 4 points, that instance of damage is avoided, and you are launched upward above your head, gaining directional control for a short time. When this effect triggers, you become immune to fall, crush and suffocation damage for the next 10 seconds. This effect has a 10 second cooldown."
+  },
+  {
+    "id": "451609",
+    "enEffect": "When your health is below 6/7/8 points, each time you take damage you gain 1 point of temporary health. The temporary health cap is 6/7/8."
+  },
+  {
+    "id": "451600",
+    "enEffect": "When you take damage of no less than 8/7/6 points, you do not suffer that damage; a nearby non-hostile creature suffers it in your place. If there is no target nearby that can take the damage, the damage you take is reduced by 10%/15%/20%, and explosion damage you take is reduced by 20%/30%/40%. If the damage source is a player, this enchantment only provides 10%/15%/20% damage reduction."
+  },
+  {
+    "id": "451601",
+    "enEffect": "When you take damage of no less than 8/7/6 points, you do not suffer that damage; a nearby hostile creature suffers it in your place. If there is no target nearby that can take the damage, the damage you take is reduced by 10%/15%/20%, and explosion damage you take is reduced by 20%/30%/40%. If the damage source is a player, this enchantment only provides 10%/15%/20% damage reduction."
+  },
+  {
+    "id": "451602",
+    "enEffect": "When you take damage of no less than 12/11/10 points, you do not suffer that damage; all nearby non-player creatures share that damage evenly in your place. If there is no target nearby that can take the damage, the damage you take is reduced by 20%/25%/30%, and explosion damage you take is reduced by 40%/50%/60%. If the damage source is a player, this enchantment only provides 20%/25%/30% damage reduction."
+  },
+  {
+    "id": "451595",
+    "enEffect": "Each of your attacks is guaranteed to apply 1/2 of the following negative effects: Poison, Wither, Weakness, Ignition, Slowness."
+  },
+  {
+    "id": "451596",
+    "enEffect": "For each piece of armor that has this enchantment, each time you travel across dimensions you gain one of the beneficial effects that an Enchanted Golden Apple can provide. This effect has a 15 minute cooldown."
+  },
+  {
+    "id": "451597",
+    "enEffect": "Unless the player dies by falling into the void, when the player takes fatal damage there is a 25% chance that 2 points of the player's health will be swapped with 2 points of hunger + 2 points of saturation, a 25% chance that 2 points of the player's health will be swapped with oxygen, a 25% chance that the player will use experience points to fill 2 points of health (30 experience points can fill 1 point of health), and a 25% chance that the player will sacrifice this enchantment in exchange for a full recovery.\n\nIf the player cannot pay the cost, then you will inevitably lose this enchantment in exchange for a full recovery."
+  },
+  {
+    "id": "451598",
+    "enEffect": "By repeatedly attacking a certain creature, weapon attack power is randomly increased by 3-7/7-11/11-15 points. Attacking a different creature will reset the attack power."
+  },
+  {
+    "id": "451599",
+    "enEffect": "When your health is about to be restored, there is a 33% chance you will not gain that restoration effect, a 33% chance of gaining 2x the restoration effect, a 24% chance of gaining 3x the restoration effect, a 5% chance that the restoration effect remains unchanged, a 1% chance of giving you a 10s \"Strength\" buff, a 1% chance of giving you a 10s \"Speed\" buff, a 1% chance of giving you a 10s \"Regeneration\" buff, a 1% chance of giving you a 10s \"Invisibility\" buff, and a 1% chance that the restoration effect will be converted into damage. For each additional level of this enchantment on the armor, this enchantment's effect is increased by 10%."
+  }
+]

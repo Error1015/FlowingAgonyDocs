@@ -1,0 +1,141 @@
+[
+  {
+    "id": "451608",
+    "zhName": "奇迹逃脱",
+    "enName": "Miraculous Escape",
+    "category": "potential-unleashed",
+    "slots": [
+      "boots"
+    ],
+    "zhEffect": "当你受到伤害且受到伤害前的血量不高于4点（）时，该次伤害将被回避，同时你将被向头顶弹射出去，并在短时间内取得方向控制权。该效果触发时，你将在接下来10秒内对摔落，挤压与窒息伤害免疫。该效果有10秒冷却时间。",
+    "conflicts": []
+  },
+  {
+    "id": "451609",
+    "zhName": "叠甲回合",
+    "enName": "Armor Up!",
+    "category": "potential-unleashed",
+    "slots": [
+      "chestplate"
+    ],
+    "zhEffect": "当你生命值低于6/7/8点时，你每受到一次伤害，都会获得1点临时生命值。临时生命值上限为6/7/8。",
+    "conflicts": []
+  },
+  {
+    "id": "451600",
+    "zhName": "求生捷径",
+    "enName": "Survival Shortcut",
+    "category": "survival-tricks",
+    "slots": [
+      "chestplate"
+    ],
+    "zhEffect": "当你受到不小于 8/7/6 点的伤害时，你不会承受该伤害，你附近的某一非敌对生物会替你承受该伤害。如果附近没有可以承受伤害的目标，那么所受到的伤害将被减免10%/15%/20%，而受到的爆炸伤害将被减免 20%/30%/40%。如果伤害来源是玩家，那么该附魔将只提供 10%/15%/20% 伤害减免。",
+    "conflicts": [
+      {
+        "zh": "求生诡计",
+        "en": "Survival Ruse"
+      },
+      {
+        "zh": "必要之恶",
+        "en": "Necessary Evil"
+      }
+    ]
+  },
+  {
+    "id": "451601",
+    "zhName": "求生诡计",
+    "enName": "Survival Ruse",
+    "category": "survival-tricks",
+    "slots": [
+      "chestplate"
+    ],
+    "zhEffect": "当你受到不小于 8/7/6 点的伤害时，你不会承受该伤害，你附近的某一敌对生物会替你承受该伤害。如果附近没有可以承受伤害的目标，那么所受到的伤害将被减免 10%/15%/20%，而受到的爆炸伤害将被减免 20%/30%/40%。如果伤害来源是玩家，那么该附魔将只提供 10%/15%/20% 伤害减免。",
+    "conflicts": [
+      {
+        "zh": "求生捷径",
+        "en": "Survival Shortcut"
+      },
+      {
+        "zh": "必要之恶",
+        "en": "Necessary Evil"
+      }
+    ]
+  },
+  {
+    "id": "451602",
+    "zhName": "必要之恶",
+    "enName": "Necessary Evil",
+    "category": "survival-tricks",
+    "slots": [
+      "chestplate"
+    ],
+    "zhEffect": "当你受到不小于 12/11/10 点的伤害时，你不会承受该伤害，你附近的所有非玩家生物会替你平均分摊该伤害。如果附近没有可以承受伤害的目标，那么你所受到的伤害将被减免 20%/25%/30%，而受到的爆炸伤害将被减免 40%/50%/60%。 如果伤害来源是玩家，那么该附魔将只提供 20%/25%/30% 伤害减免。",
+    "conflicts": [
+      {
+        "zh": "求生诡计",
+        "en": "Survival Ruse"
+      },
+      {
+        "zh": "求生捷径",
+        "en": "Survival Shortcut"
+      }
+    ]
+  },
+  {
+    "id": "451595",
+    "zhName": "欺诈师",
+    "enName": "Trickster",
+    "category": "dice-of-fraud",
+    "slots": [
+      "sword",
+      "axe"
+    ],
+    "zhEffect": "你的每次攻击必定附加以下负面效果中的1/2种：中毒 (Poison)，凋零 (Wither)，虚弱 (Weakness)，点燃，缓慢 (Slowness)。",
+    "conflicts": []
+  },
+  {
+    "id": "451596",
+    "zhName": "来个苹果",
+    "enName": "An Enchanted Golden Apple A Day",
+    "category": "dice-of-fraud",
+    "slots": [
+      "armor"
+    ],
+    "zhEffect": "每有一件护甲上有此附魔，你每次穿越维度都将获得附魔金苹果 (Enchanted Golden Apple)能带来的增益效果中的一种。该效果有 15 分钟的冷却时间。",
+    "conflicts": []
+  },
+  {
+    "id": "451597",
+    "zhName": "死亡朋克",
+    "enName": "Deathpunk",
+    "category": "dice-of-fraud",
+    "slots": [
+      "chestplate"
+    ],
+    "zhEffect": "除非玩家掉落虚空死亡，否则在玩家受到致命伤害时，有25%的概率玩家的2点（）生命值将和2点（）饥饿值+2点（）饱和度互换，有25%的概率玩家的2点（）生命值将和氧气值互换，有25%的概率玩家将用经验值填满2点（）生命值（30经验值可填充1点（）生命值），有25%的概率玩家的牺牲这一项附魔来换取完全康复。\n\n如果玩家无法支付代价，那你必将损失该附魔来换取完全康复。",
+    "conflicts": []
+  },
+  {
+    "id": "451598",
+    "zhName": "食髓知味",
+    "enName": "Savor the Tasted",
+    "category": "dice-of-fraud",
+    "slots": [
+      "sword",
+      "axe"
+    ],
+    "zhEffect": "重复攻击某种生物，武器攻击力随机提高 3-7/7-11/11-15 点。攻击不同的生物攻击力将会重置。",
+    "conflicts": []
+  },
+  {
+    "id": "451599",
+    "zhName": "异常治疗",
+    "enName": "Exotic Healer",
+    "category": "dice-of-fraud",
+    "slots": [
+      "armor"
+    ],
+    "zhEffect": "当你生命值将要恢复时，你有33%的概率不会获得该恢复效果，33%的概率获得2倍恢复效果，24%的概率获得3倍恢复效果，5%的概率效果恢复效果保持不变，1%的概率给你10s“力量 (Strength)”增益效果，1%的概率给你10s“速度 (Speed)”增益效果，1%的概率给你10s“生命恢复 (Regeneration)”增益效果，1%的概率给你10s“隐身 (Invisibility)”增益效果，1%的概率恢复效果将转变为伤害。护甲上每多一级该附魔，该附魔效果将增强10%。",
+    "conflicts": []
+  }
+]
