@@ -1,3 +1,4 @@
+import { withBase } from 'vitepress'
 import dataset from '../data/dataset.json'
 
 export type Lang = 'zh' | 'en'
@@ -266,8 +267,13 @@ export function labels(lang: Lang): UILabels {
 /**
  * Routes are mirrored between locales: the Chinese site lives at the root,
  * the English site under /en/.
+ *
+ * The result is passed through `withBase()` because these paths are used in
+ * component templates, which VitePress does not rewrite automatically the way
+ * it does for links written in markdown.
  */
 export function localePath(path: string, lang: Lang): string {
   const clean = path.startsWith('/') ? path : `/${path}`
-  return lang === 'zh' ? clean : `/en${clean === '/' ? '/' : clean}`
+  const localized = lang === 'zh' ? clean : `/en${clean === '/' ? '/' : clean}`
+  return withBase(localized)
 }

@@ -87,33 +87,68 @@ npm run preview   # 本地预览构建结果
 
 ## 部署
 
-默认 `base` 为 `/`，适合部署在域名根目录（Vercel / Netlify / Cloudflare Pages 等）。
+### GitHub Pages（当前配置）
 
-若部署到子路径（例如 GitHub Pages 的 `https://<user>.github.io/<repo>/`），在 `docs/.vitepress/config.mts` 中设置：
+仓库为 `Error1015/FlowingAgonyDocs`，属于 **项目站点**，访问地址是子路径：
 
-```ts
-export default defineConfig({
-  base: '/<repo>/',
-  // …
-})
+```
+https://error1015.github.io/FlowingAgonyDocs/
 ```
 
-构建产物为纯静态文件，直接发布 `docs/.vitepress/dist` 即可。
+因此 `config.mts` 中必须设置 `base`，否则所有 CSS/JS 都会从
+`https://error1015.github.io/assets/...` 加载而 404，页面就会变成空白或纯文本：
+
+```ts
+const base = process.env.DOCS_BASE ?? '/FlowingAgonyDocs/'
+```
+
+推送 `master` 分支后，`.github/workflows/deploy.yml` 会自动构建并发布
+`docs/.vitepress/dist`。
+
+::: warning 仓库改名 / 换域名时
+- **改仓库名**：把 `config.mts` 里的 `'/FlowingAgonyDocs/'` 一起改掉。
+- **绑定自定义域名或部署到根目录**：构建时用 `DOCS_BASE=/` 覆盖：
+
+  ```bash
+  DOCS_BASE=/ npm run build          # macOS / Linux / CI
+  $env:DOCS_BASE='/'; npm run build  # Windows PowerShell
+  ```
+:::
+
+### 其它静态托管
+
+产物是纯静态文件，发布 `docs/.vitepress/dist` 即可。Vercel / Netlify /
+Cloudflare Pages 部署在根目录，构建命令用 `DOCS_BASE=/ npm run build`。
+
+### 本地验证子路径
+
+`vitepress preview` 会按 `base` 提供页面（本地地址为
+`http://localhost:4173/FlowingAgonyDocs/`）。如果要用纯 Node 复现同样的路径：
+
+```bash
+node scripts/dev/serve-dist.mjs docs/.vitepress/dist 4174 /FlowingAgonyDocs/
+```
+
+部署前建议跑一次链接检查，它会找出所有漏加 `base` 前缀的内链与静态资源：
+
+```bash
+node scripts/dev/audit-links.mjs docs/.vitepress/dist /FlowingAgonyDocs/
+```
 
 ## 开发辅助脚本
 
-`scripts/dev/` 下的三个脚本只在本地排查排版时使用，不参与站点构建：
+`scripts/dev/` 下的脚本只在本地排查排版与部署时使用，不参与站点构建：
 
 | 脚本 | 用途 |
 | --- | --- |
-| `serve-dist.mjs` | 用纯 Node 静态托管 `dist`，在 `vitepress preview` 不方便时兜底 |
-| `screenshot.mjs` | 通过 CDP 驱动无头 Chrome 截图，支持亮/暗两种配色与整页捕获 |
+| `serve-dist.mjs` | 纯 Node 静态托管 `dist`，可直接模拟 GitHub Pages 子路径 |
+| `audit-links.mjs` | 扫描构建产物，列出缺少 `base` 前缀的内链与资源 |
+| `screenshot.mjs` | 通过 CDP 驱动无头 Chrome 截图，支持亮/暗配色与整页捕获 |
 | `probe.mjs` | 在已构建页面里执行一段 JS 并打印结果，用于定位布局问题 |
 
 ```bash
-node scripts/dev/serve-dist.mjs docs/.vitepress/dist 4173
-node scripts/dev/screenshot.mjs http://127.0.0.1:4173 shots "/=home" "/enchantments/=enchantments"
-node scripts/dev/screenshot.mjs http://127.0.0.1:4173 shots --dark "/=home"
+node scripts/dev/screenshot.mjs http://127.0.0.1:4174 shots "/=home" "/enchantments/=enchantments"
+node scripts/dev/screenshot.mjs http://127.0.0.1:4174 shots --dark "/=home"
 ```
 
 ## 许可与致谢

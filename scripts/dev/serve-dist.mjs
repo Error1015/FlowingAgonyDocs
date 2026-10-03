@@ -1,11 +1,17 @@
 // Minimal static file server for the built site.
 // Used for local verification only; `npm run preview` is the normal route.
+//
+//   node scripts/dev/serve-dist.mjs [distDir] [port] [basePrefix]
+//
+// Pass the same base as the config (e.g. /FlowingAgonyDocs/) to reproduce a
+// GitHub Pages project-site sub-path locally.
 import { createServer } from 'node:http'
 import { readFile, stat } from 'node:fs/promises'
 import { extname, join, normalize } from 'node:path'
 
 const root = process.argv[2] ?? 'docs/.vitepress/dist'
 const port = Number(process.argv[3] ?? 4173)
+const base = process.argv[4] ?? '/'
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -41,10 +47,29 @@ async function resolve(pathname) {
 createServer(async (req, res) => {
   try {
     const { pathname } = new URL(req.url ?? '/', 'http://localhost')
-    const { file, s } = await resolve(decodeURIComponent(pathname))
+    let path = decodeURIComponent(pathname)
+
+    // Strip the deploy base so a project-site sub-path can be reproduced.
+    if (base !== '/') {
+      if (path === base.replace(/\/$/, '')) {
+        res.writeHead(302, { location: base })
+        res.end()
+        return
+      }
+      if (!path.startsWith(base)) {
+        res.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' })
+        res.end(`404 ${pathname} (outside base ${base})`)
+        return
+      }
+      path = path.slice(base.length - 1)
+    }
+
+    const { file, s } = await resolve(path)
     if (!s) {
-      res.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' })
-      res.end(`404 ${pathname}`)
+      const notFound = join(root, '404.html')
+      const nf = await stat(notFound).catch(() => null)
+      res.writeHead(404, { 'content-type': 'text/html; charset=utf-8' })
+      res.end(nf ? await readFile(notFound) : `404 ${pathname}`)
       return
     }
     res.writeHead(200, {
@@ -57,5 +82,5 @@ createServer(async (req, res) => {
     res.end(String(error))
   }
 }).listen(port, '127.0.0.1', () => {
-  console.log(`serving ${root} at http://127.0.0.1:${port}/`)
+  console.log(`serving ${root} at http://127.0.0.1:${port}${base}`)
 })

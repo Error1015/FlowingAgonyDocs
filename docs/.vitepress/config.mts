@@ -5,6 +5,16 @@ const MOD_EN = "MarbleGate's Exotic Enchantment: Flowing Agony: Reborn"
 
 const REPO = 'https://github.com/Error1015/FlowingAgony-Reborn'
 
+/**
+ * GitHub Pages project sites are served from a sub-path:
+ *   https://error1015.github.io/FlowingAgonyDocs/
+ * so every asset and internal link has to be prefixed with the repo name.
+ *
+ * Override with DOCS_BASE=/ when hosting at a domain root (custom domain,
+ * Netlify, Vercel, Cloudflare Pages …).
+ */
+const base = process.env.DOCS_BASE ?? '/FlowingAgonyDocs/'
+
 const zhSidebar = [
   {
     text: '开始使用',
@@ -88,12 +98,14 @@ const searchTranslations = {
 }
 
 export default defineConfig({
+  base,
   lang: 'zh-CN',
   title: MOD_ZH,
   description:
     '白门的奇异附魔：苦痛长河：重生 —— Minecraft Java 版 Forge 模组文档。59 个附魔的完整分类与效果说明，中英双语、亮暗主题。',
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
+    // `head` entries are emitted verbatim, so the base has to be applied here.
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}logo.svg` }],
     ['meta', { name: 'theme-color', content: '#c8392f' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: MOD_ZH }],
