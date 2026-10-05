@@ -19,9 +19,14 @@ import EnchantCard from './EnchantCard.vue'
 const props = withDefaults(defineProps<{ lang?: Lang }>(), { lang: 'zh' })
 const t = computed(() => labels(props.lang))
 
+/** Boolean flags on an enchantment that are worth filtering by. */
+type TraitKey = 'treasure' | 'curse' | 'noTrade' | 'legacyRemoved'
+const TRAITS: TraitKey[] = ['treasure', 'curse', 'noTrade', 'legacyRemoved']
+
 const query = ref('')
 const activeCat = ref<string>('all')
 const activeRarity = ref<RarityClass | 'all'>('all')
+const activeTrait = ref<TraitKey | 'all'>('all')
 const activeLevel = ref(1)
 
 const rarityLabels: Record<RarityClass, { zh: string; en: string }> = {
@@ -38,6 +43,26 @@ const countByCategory = computed(() => {
   for (const e of enchantments) m.set(e.category, (m.get(e.category) ?? 0) + 1)
   return m
 })
+
+const traitCounts = computed(() => {
+  const m = {} as Record<TraitKey, number>
+  for (const k of TRAITS) m[k] = enchantments.filter((e) => e[k]).length
+  return m
+})
+
+function traitLabel(key: TraitKey): string {
+  const l = t.value
+  switch (key) {
+    case 'treasure':
+      return l.traitTreasure
+    case 'curse':
+      return l.traitCurse
+    case 'noTrade':
+      return l.traitNoTrade
+    default:
+      return l.traitRemoved
+  }
+}
 
 function haystack(e: Enchantment): string {
   return [
@@ -57,18 +82,23 @@ function haystack(e: Enchantment): string {
 
 const filtered = computed<Enchantment[]>(() => {
   const q = query.value.trim().toLowerCase()
+  const cat = activeCat.value
+  const rarity = activeRarity.value
+  const trait = activeTrait.value
+  const level = activeLevel.value
   return enchantments.filter((e) => {
-    if (activeCat.value !== 'all' && e.category !== activeCat.value) return false
-    if (activeRarity.value !== 'all' && rarityOf(e).cls !== activeRarity.value) return false
-    if (activeLevel.value > 1 && e.maxLevel < activeLevel.value) return false
+    if (cat !== 'all' && e.category !== cat) return false
+    if (rarity !== 'all' && rarityOf(e).cls !== rarity) return false
+    if (trait !== 'all' && !e[trait]) return false
+    if (level > 1 && e.maxLevel < level) return false
     if (q && !haystack(e).includes(q)) return false
     return true
   })
 })
 
-/** Group by category when browsing, flatten once a search is active. */
+/** Group by category when browsing, flatten once a narrowing filter is active. */
 const grouped = computed(() => {
-  if (query.value.trim() || activeCat.value !== 'all') {
+  if (query.value.trim() || activeCat.value !== 'all' || activeTrait.value !== 'all') {
     return [{ id: activeCat.value, items: filtered.value, flat: true }]
   }
   return categories
@@ -77,13 +107,19 @@ const grouped = computed(() => {
 })
 
 const isFiltered = computed(
-  () => !!query.value.trim() || activeCat.value !== 'all' || activeRarity.value !== 'all' || activeLevel.value > 1,
+  () =>
+    !!query.value.trim() ||
+    activeCat.value !== 'all' ||
+    activeRarity.value !== 'all' ||
+    activeTrait.value !== 'all' ||
+    activeLevel.value > 1,
 )
 
 function reset() {
   query.value = ''
   activeCat.value = 'all'
   activeRarity.value = 'all'
+  activeTrait.value = 'all'
   activeLevel.value = 1
 }
 
@@ -147,6 +183,7 @@ function catGlyph(id: string) {
       </div>
 
       <div class="fa-explorer__row">
+        <span class="fa-filter-label">{{ t.filterCategory }}</span>
         <div class="fa-chips">
           <button
             type="button"
@@ -174,6 +211,7 @@ function catGlyph(id: string) {
       </div>
 
       <div class="fa-explorer__row">
+        <span class="fa-filter-label">{{ t.filterRarity }}</span>
         <div class="fa-chips">
           <button
             type="button"
@@ -194,6 +232,32 @@ function catGlyph(id: string) {
           >
             <span class="fa-chip__dot" />
             {{ lang === 'zh' ? rarityLabels[r].zh : rarityLabels[r].en }}
+          </button>
+        </div>
+      </div>
+
+      <div class="fa-explorer__row">
+        <span class="fa-filter-label">{{ t.filterTraits }}</span>
+        <div class="fa-chips">
+          <button
+            type="button"
+            class="fa-chip"
+            :class="{ 'is-on': activeTrait === 'all' }"
+            @click="activeTrait = 'all'"
+          >
+            {{ t.all }}
+          </button>
+          <button
+            v-for="key in TRAITS"
+            :key="key"
+            type="button"
+            class="fa-chip fa-chip--trait"
+            :class="[`is-${key}`, { 'is-on': activeTrait === key }]"
+            @click="activeTrait = activeTrait === key ? 'all' : key"
+          >
+            <span class="fa-chip__dot" />
+            {{ traitLabel(key) }}
+            <span class="fa-chip__count">{{ traitCounts[key] }}</span>
           </button>
         </div>
         <button v-if="isFiltered" type="button" class="fa-linkbtn" @click="reset">

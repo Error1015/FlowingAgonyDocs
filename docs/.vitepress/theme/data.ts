@@ -185,6 +185,13 @@ export interface UILabels {
   vanilla: string
   unknown: string
   category: string
+  filterCategory: string
+  filterRarity: string
+  filterTraits: string
+  traitTreasure: string
+  traitCurse: string
+  traitNoTrade: string
+  traitRemoved: string
   buffs: string
   debuffs: string
   version: string
@@ -218,6 +225,13 @@ const ZH: UILabels = {
   vanilla: '原版',
   unknown: '其它',
   category: '分类',
+  filterCategory: '分类',
+  filterRarity: '稀有度',
+  filterTraits: '特性',
+  traitTreasure: '宝藏附魔',
+  traitCurse: '诅咒附魔',
+  traitNoTrade: '不可交易',
+  traitRemoved: '已移除',
   buffs: '增益效果',
   debuffs: '负面效果',
   version: '版本',
@@ -251,6 +265,13 @@ const EN: UILabels = {
   vanilla: 'Vanilla',
   unknown: 'Other',
   category: 'Category',
+  filterCategory: 'Category',
+  filterRarity: 'Rarity',
+  filterTraits: 'Traits',
+  traitTreasure: 'Treasure',
+  traitCurse: 'Curse',
+  traitNoTrade: 'No trade',
+  traitRemoved: 'Removed',
   buffs: 'Buffs',
   debuffs: 'Debuffs',
   version: 'Version',

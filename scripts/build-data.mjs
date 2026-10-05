@@ -31,10 +31,18 @@ for (let i = 1; i <= 12; i++) {
   }
 }
 
+// `enEffect` in data.raw.json is an optional hand-written override. It wins
+// over the machine translation in scripts/i18n/out-*.json, which lets a
+// one-off correction live next to the Chinese text it belongs to and survive
+// a later `data:split` + re-translation.
+const overrides = [];
 const enchantments = raw.enchantments.map((e) => {
-  const enEffect = translations.get(e.id);
+  const inline = (e.enEffect ?? '').trim();
+  const fromFile = (translations.get(e.id) ?? '').trim();
+  if (inline) overrides.push(e.slug);
+  const enEffect = inline || fromFile;
   if (!enEffect) problems.push(`missing English effect for ${e.id} (${e.zhName})`);
-  return { ...e, enEffect: enEffect || '' };
+  return { ...e, enEffect };
 });
 
 const ids = new Set(enchantments.map((e) => e.id));
@@ -107,6 +115,9 @@ console.log(`  releases     : ${dataset.changelog.length}`);
 console.log(
   `  en effects   : ${enchantments.filter((e) => e.enEffect).length}/${enchantments.length}`,
 );
+if (overrides.length) {
+  console.log(`  en overrides : ${overrides.join(', ')}`);
+}
 if (problems.length) {
   console.log('\nPROBLEMS:');
   for (const p of problems) console.log('  - ' + p);

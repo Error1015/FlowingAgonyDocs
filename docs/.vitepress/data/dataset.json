@@ -1356,7 +1356,7 @@
       "noTrade": false,
       "legacyRemoved": false,
       "conflicts": [],
-      "zhEffect": "当你受到伤害且受到伤害前的血量不高于4点（）时，该次伤害将被回避，同时你将被向头顶弹射出去，并在短时间内取得方向控制权。该效果触发时，你将在接下来10秒内对摔落，挤压与窒息伤害免疫。该效果有10秒冷却时间。",
+      "zhEffect": "当你受到伤害且受到伤害前的血量不高于4点时，该次伤害将被回避，同时你将被向头顶弹射出去，并在短时间内取得方向控制权。该效果触发时，你将在接下来10秒内对摔落，挤压与窒息伤害免疫。该效果有10秒冷却时间。",
       "enEffect": "When you take damage and your health before taking that damage is not higher than 4 points, that instance of damage is avoided, and you are launched upward above your head, gaining directional control for a short time. When this effect triggers, you become immune to fall, crush and suffocation damage for the next 10 seconds. This effect has a 10 second cooldown.",
       "conflictLinks": []
     },
@@ -1591,8 +1591,8 @@
       "noTrade": false,
       "legacyRemoved": false,
       "conflicts": [],
-      "zhEffect": "除非玩家掉落虚空死亡，否则在玩家受到致命伤害时，有25%的概率玩家的2点（）生命值将和2点（）饥饿值+2点（）饱和度互换，有25%的概率玩家的2点（）生命值将和氧气值互换，有25%的概率玩家将用经验值填满2点（）生命值（30经验值可填充1点（）生命值），有25%的概率玩家的牺牲这一项附魔来换取完全康复。\n\n如果玩家无法支付代价，那你必将损失该附魔来换取完全康复。",
-      "enEffect": "Unless the player dies by falling into the void, when the player takes fatal damage there is a 25% chance that 2 points of the player's health will be swapped with 2 points of hunger + 2 points of saturation, a 25% chance that 2 points of the player's health will be swapped with oxygen, a 25% chance that the player will use experience points to fill 2 points of health (30 experience points can fill 1 point of health), and a 25% chance that the player will sacrifice this enchantment in exchange for a full recovery.\n\nIf the player cannot pay the cost, then you will inevitably lose this enchantment in exchange for a full recovery.",
+      "zhEffect": "除非玩家掉落虚空死亡，否则在玩家受到致命伤害时，有25%的概率玩家的2点生命值将和2点饥饿值+2点饱和度互换，有25%的概率玩家的2点生命值将和氧气值互换，有25%的概率玩家将用经验值填满2点生命值（30经验值可填充1点生命值），有25%的概率玩家将牺牲这一项附魔来换取完全康复。\n\n如果玩家无法支付代价，那玩家必将损失该附魔来换取完全康复。",
+      "enEffect": "Unless the player dies by falling into the void, when the player takes fatal damage there is a 25% chance that 2 points of the player's health will be swapped with 2 points of hunger + 2 points of saturation, a 25% chance that 2 points of the player's health will be swapped with oxygen, a 25% chance that the player will use experience points to fill 2 points of health (30 experience points can fill 1 point of health), and a 25% chance that the player will sacrifice this enchantment in exchange for a full recovery.\n\nIf the player cannot pay that cost, they will inevitably lose this enchantment in exchange for a full recovery.",
       "conflictLinks": []
     },
     {
@@ -2402,7 +2402,7 @@
     "curseCount": 1
   },
   "build": {
-    "generatedAt": "2026-10-03",
+    "generatedAt": "2026-10-05",
     "source": "https://www.mcmod.cn/item/list/3872-5.html"
   }
 }

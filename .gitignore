@@ -23,3 +23,4 @@ Thumbs.db
 
 # local preview screenshots produced by scripts/dev/screenshot.mjs
 shots/
+shots-*/

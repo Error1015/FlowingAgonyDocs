@@ -656,6 +656,39 @@
   display: flex;
   flex-wrap: wrap;
   gap: 7px;
+  min-width: 0;
+}
+
+/* leading label that names each filter row */
+.fa-filter-label {
+  flex: none;
+  min-width: 4.5rem;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fa-text-muted);
+}
+
+/* trait chips reuse the colours of their card badges */
+.fa-chip--trait.is-treasure {
+  --fa-chip-accent: var(--fa-rarity-legendary);
+}
+
+.fa-chip--trait.is-curse {
+  --fa-chip-accent: var(--fa-accent);
+}
+
+.fa-chip--trait.is-noTrade {
+  --fa-chip-accent: var(--fa-rarity-common);
+}
+
+.fa-chip--trait.is-legacyRemoved {
+  --fa-chip-accent: var(--fa-violet);
+}
+
+.fa-explorer__row .fa-linkbtn {
+  margin-left: auto;
 }
 
 .fa-chip {

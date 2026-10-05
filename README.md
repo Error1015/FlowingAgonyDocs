@@ -4,7 +4,8 @@
 
 - 简体中文（站点根目录）与 English（`/en/`）双语，语言切换器一键互跳
 - 亮色 / 暗色主题，两套配色都经过单独设计（不是简单反色）
-- 59 个附魔按 11 个分类整理，可搜索、可按分类 / 稀有度 / 等级筛选
+- 59 个附魔按 11 个分类整理，可搜索；筛选维度为**分类 / 稀有度 / 特性 / 等级**
+- **特性筛选**：宝藏附魔、诅咒附魔、不可交易、Backport 已移除，均可一键筛出
 - **等级高亮**：切换附魔等级时，效果文本中对应的数值会被高亮，其余变淡——所有数字均直接来自原始资料，站点不做任何推算
 - 附魔速查表、状态效果、更新日志、模组信息页
 
@@ -85,6 +86,12 @@ npm run preview   # 本地预览构建结果
    ```
    脚本会校验每个附魔是否都有英文文本、ID 是否重复、冲突附魔引用是否可解析，并打印问题清单。
 
+### 手改中文时要注意的两件事
+
+**空括号是原文自带的占位符。** MC百科的资料页里存在 `2点（）生命值` 这种写法——原编辑者本想往括号里放血量/饥饿图标，但括号是空的。录入时应当删掉空括号，只保留有内容的括号（例如 `（30经验值可填充1点生命值）`）。
+
+**改完中文记得对齐英文。** 中文在 `data.raw.json` 的 `zhEffect`，英文默认来自 `scripts/i18n/out-*.json`。如果只是小范围修订，可以直接把英文写进 `data.raw.json` 的 `enEffect` 字段——**它是覆盖值，优先级高于翻译文件**，这样译文修订就和中文放在一起，重新切分翻译切片也不会被覆盖。`npm run data:build` 会在输出里列出所有生效的覆盖（`en overrides : ...`）。
+
 ## 部署
 
 ### GitHub Pages（当前配置）
@@ -143,12 +150,14 @@ node scripts/dev/audit-links.mjs docs/.vitepress/dist /FlowingAgonyDocs/
 | --- | --- |
 | `serve-dist.mjs` | 纯 Node 静态托管 `dist`，可直接模拟 GitHub Pages 子路径 |
 | `audit-links.mjs` | 扫描构建产物，列出缺少 `base` 前缀的内链与资源 |
-| `screenshot.mjs` | 通过 CDP 驱动无头 Chrome 截图，支持亮/暗配色与整页捕获 |
-| `probe.mjs` | 在已构建页面里执行一段 JS 并打印结果，用于定位布局问题 |
+| `screenshot.mjs` | 通过 CDP 驱动无头 Chrome 截图，支持亮/暗配色、整页捕获与 `--pre` 预置脚本 |
+| `probe.mjs` | 在已构建页面里执行一段 JS 并打印结果，用于定位布局与交互问题 |
 
 ```bash
 node scripts/dev/screenshot.mjs http://127.0.0.1:4174 shots "/=home" "/enchantments/=enchantments"
 node scripts/dev/screenshot.mjs http://127.0.0.1:4174 shots --dark "/=home"
+# 先用一段 JS 改变页面状态再截图（例如点开某个筛选项）：
+node scripts/dev/screenshot.mjs http://127.0.0.1:4174 shots --pre=state.js "/enchantments/=filtered"
 ```
 
 ## 许可与致谢

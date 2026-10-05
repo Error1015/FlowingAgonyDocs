@@ -7,7 +7,7 @@
 //   node scripts/dev/screenshot.mjs http://127.0.0.1:4173 shots \
 //     "/=home" "/enchantments/=enchantments"
 import { spawn } from 'node:child_process'
-import { mkdirSync, writeFileSync, existsSync } from 'node:fs'
+import { mkdirSync, writeFileSync, existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 const CHROME_CANDIDATES = [
@@ -20,15 +20,21 @@ const CHROME_CANDIDATES = [
 
 const [baseUrl, outDir, ...rest] = process.argv.slice(2)
 const dark = rest.includes('--dark')
+// `--pre=<file>` runs a JS file in the page before capturing, so interactive
+// states (an active filter, an open menu) can be photographed too.
+const preArg = rest.find((a) => a.startsWith('--pre='))
+const preScript = preArg ? readFileSync(preArg.slice('--pre='.length), 'utf8') : null
 const pages = rest
-  .filter((a) => a !== '--dark')
+  .filter((a) => a !== '--dark' && !a.startsWith('--pre='))
   .map((a) => {
     const [path, name] = a.split('=')
     return { path, name: name ?? (path.replace(/\W+/g, '_') || 'index') }
   })
 
 if (!baseUrl || !outDir || !pages.length) {
-  console.error('usage: node screenshot.mjs <baseUrl> <outDir> [--dark] "/path=name" ...')
+  console.error(
+    'usage: node screenshot.mjs <baseUrl> <outDir> [--dark] [--pre=file.js] "/path=name" ...',
+  )
   process.exit(1)
 }
 
@@ -129,6 +135,16 @@ async function capture(target, page) {
   await cdp.send('Page.navigate', { url })
   // wait for the app to hydrate and fonts to settle
   await sleep(3500)
+
+  if (preScript) {
+    const { exceptionDetails } = await cdp.send('Runtime.evaluate', {
+      expression: preScript,
+      returnByValue: true,
+      awaitPromise: true,
+    })
+    if (exceptionDetails) throw new Error(`--pre script failed: ${exceptionDetails.text}`)
+    await sleep(600)
+  }
 
   // expand the viewport to the full document height for a complete capture
   const { result } = await cdp.send('Runtime.evaluate', {
