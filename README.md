@@ -150,7 +150,7 @@ node scripts/dev/audit-links.mjs docs/.vitepress/dist /FlowingAgonyDocs/
 | --- | --- |
 | `serve-dist.mjs` | 纯 Node 静态托管 `dist`，可直接模拟 GitHub Pages 子路径 |
 | `audit-links.mjs` | 扫描构建产物，列出缺少 `base` 前缀的内链与资源 |
-| `screenshot.mjs` | 通过 CDP 驱动无头 Chrome 截图，支持亮/暗配色、整页捕获与 `--pre` 预置脚本 |
+| `screenshot.mjs` | 通过 CDP 驱动无头 Chrome 截图，支持亮/暗配色、整页捕获、`--viewport` 视口捕获与 `--pre` 预置脚本 |
 | `probe.mjs` | 在已构建页面里执行一段 JS 并打印结果，用于定位布局与交互问题 |
 
 ```bash
@@ -158,6 +158,8 @@ node scripts/dev/screenshot.mjs http://127.0.0.1:4174 shots "/=home" "/enchantme
 node scripts/dev/screenshot.mjs http://127.0.0.1:4174 shots --dark "/=home"
 # 先用一段 JS 改变页面状态再截图（例如点开某个筛选项）：
 node scripts/dev/screenshot.mjs http://127.0.0.1:4174 shots --pre=state.js "/enchantments/=filtered"
+# 滚动后才出现的界面（例如自动收起的筛选栏）要用视口模式：
+node scripts/dev/screenshot.mjs http://127.0.0.1:4174 shots --viewport --pre=scroll.js "/enchantments/=folded"
 ```
 
 ## 许可与致谢

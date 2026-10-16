@@ -563,6 +563,26 @@
  * Enchantment explorer
  * ================================================================== */
 
+/* zero-height anchor: tells us when the toolbar has stuck to the top */
+.fa-explorer__sentinel {
+  height: 0;
+  margin: 0;
+}
+
+/**
+ * Folding the toolbar changes the page height by ~260px. Chrome's scroll
+ * anchoring normally compensates for that by moving the scroll position —
+ * which lands on the other side of the fold threshold, flips the state, and
+ * produces an endless flicker the moment you scroll past the toolbar.
+ *
+ * Excluding this subtree from anchoring means the fold never moves the scroll
+ * position, so the state stays put; the height transition below slides the
+ * list up smoothly instead of jumping.
+ */
+.fa-explorer {
+  overflow-anchor: none;
+}
+
 .fa-explorer__toolbar {
   position: sticky;
   top: var(--vp-nav-height, 64px);
@@ -575,6 +595,112 @@
   backdrop-filter: saturate(180%) blur(14px);
   -webkit-backdrop-filter: saturate(180%) blur(14px);
   box-shadow: var(--fa-shadow-sm);
+  transition: padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* folded state: only the compact bar is left. Near-opaque, because card
+   text now scrolls directly underneath it. */
+.fa-explorer__toolbar.is-collapsed {
+  padding-top: 9px;
+  padding-bottom: 9px;
+  background: color-mix(in srgb, var(--fa-surface) 97%, transparent);
+  box-shadow: var(--fa-shadow);
+}
+
+.fa-explorer__compact {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-3px);
+  transition: max-height 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.22s ease,
+    transform 0.26s ease;
+}
+
+.fa-explorer__toolbar.is-collapsed .fa-explorer__compact {
+  max-height: 48px;
+  opacity: 1;
+  transform: none;
+}
+
+.fa-explorer__panel {
+  max-height: var(--fa-panel-h, 520px);
+  overflow: hidden;
+  transition: max-height 0.34s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.24s ease;
+}
+
+.fa-explorer__toolbar.is-collapsed .fa-explorer__panel {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* the button the toolbar folds into */
+.fa-filterbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  padding: 8px 14px;
+  border: 1px solid var(--fa-border-strong);
+  border-radius: 99px;
+  background: var(--fa-surface);
+  color: var(--fa-text-strong);
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.fa-filterbtn:hover {
+  border-color: color-mix(in srgb, var(--fa-accent) 55%, transparent);
+  color: var(--vp-c-brand-1);
+}
+
+.fa-filterbtn > svg:first-child {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
+.fa-filterbtn__count {
+  min-width: 18px;
+  padding: 0 5px;
+  border-radius: 99px;
+  background: var(--fa-accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.fa-filterbtn__chev {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  opacity: 0.6;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fa-filterbtn__chev.is-open {
+  transform: rotate(180deg);
+}
+
+/* what is currently being filtered, while folded */
+.fa-explorer__summary {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 12.5px;
+  color: var(--fa-text-muted);
 }
 
 .fa-explorer__row {

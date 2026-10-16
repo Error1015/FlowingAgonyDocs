@@ -181,6 +181,9 @@ export interface UILabels {
   results: string
   empty: string
   clear: string
+  filters: string
+  showFilters: string
+  hideFilters: string
   source: string
   vanilla: string
   unknown: string
@@ -221,6 +224,9 @@ const ZH: UILabels = {
   results: '匹配附魔',
   empty: '没有符合条件的附魔，试试换个关键词。',
   clear: '重置筛选',
+  filters: '筛选',
+  showFilters: '展开筛选条件',
+  hideFilters: '收起筛选条件',
   source: '来源',
   vanilla: '原版',
   unknown: '其它',
@@ -261,6 +267,9 @@ const EN: UILabels = {
   results: 'Matching enchantments',
   empty: 'No enchantment matches those filters. Try another keyword.',
   clear: 'Reset filters',
+  filters: 'Filters',
+  showFilters: 'Show filter options',
+  hideFilters: 'Hide filter options',
   source: 'Source',
   vanilla: 'Vanilla',
   unknown: 'Other',

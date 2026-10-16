@@ -20,12 +20,14 @@ const CHROME_CANDIDATES = [
 
 const [baseUrl, outDir, ...rest] = process.argv.slice(2)
 const dark = rest.includes('--dark')
+// `--viewport` captures only what is on screen, for scroll-dependent UI.
+const viewportOnly = rest.includes('--viewport')
 // `--pre=<file>` runs a JS file in the page before capturing, so interactive
 // states (an active filter, an open menu) can be photographed too.
 const preArg = rest.find((a) => a.startsWith('--pre='))
 const preScript = preArg ? readFileSync(preArg.slice('--pre='.length), 'utf8') : null
 const pages = rest
-  .filter((a) => a !== '--dark' && !a.startsWith('--pre='))
+  .filter((a) => a !== '--dark' && a !== '--viewport' && !a.startsWith('--pre='))
   .map((a) => {
     const [path, name] = a.split('=')
     return { path, name: name ?? (path.replace(/\W+/g, '_') || 'index') }
@@ -33,7 +35,7 @@ const pages = rest
 
 if (!baseUrl || !outDir || !pages.length) {
   console.error(
-    'usage: node screenshot.mjs <baseUrl> <outDir> [--dark] [--pre=file.js] "/path=name" ...',
+    'usage: node screenshot.mjs <baseUrl> <outDir> [--dark] [--viewport] [--pre=file.js] "/path=name" ...',
   )
   process.exit(1)
 }
@@ -146,27 +148,32 @@ async function capture(target, page) {
     await sleep(600)
   }
 
-  // expand the viewport to the full document height for a complete capture
-  const { result } = await cdp.send('Runtime.evaluate', {
-    expression: 'document.documentElement.scrollHeight',
-    returnByValue: true,
-  })
-  const fullHeight = Math.min(Math.max(Number(result.value) || 1000, 800), 20000)
-  await cdp.send('Emulation.setDeviceMetricsOverride', {
-    width: 1440,
-    height: fullHeight,
-    deviceScaleFactor: 1,
-    mobile: false,
-  })
-  await sleep(900)
+  // Expand the viewport to the full document height for a complete capture.
+  // `--viewport` skips this, which is what you want for scroll-dependent UI
+  // (a full-height viewport has nothing left to scroll).
+  let shotHeight = 1000
+  if (!viewportOnly) {
+    const { result } = await cdp.send('Runtime.evaluate', {
+      expression: 'document.documentElement.scrollHeight',
+      returnByValue: true,
+    })
+    shotHeight = Math.min(Math.max(Number(result.value) || 1000, 800), 20000)
+    await cdp.send('Emulation.setDeviceMetricsOverride', {
+      width: 1440,
+      height: shotHeight,
+      deviceScaleFactor: 1,
+      mobile: false,
+    })
+    await sleep(900)
+  }
 
   const shot = await cdp.send('Page.captureScreenshot', {
     format: 'png',
-    captureBeyondViewport: true,
+    captureBeyondViewport: !viewportOnly,
   })
   const file = join(outDir, `${page.name}${dark ? '-dark' : '-light'}.png`)
   writeFileSync(file, Buffer.from(shot.data, 'base64'))
-  console.log(`${file}  (1440x${fullHeight})`)
+  console.log(`${file}  (1440x${shotHeight})`)
   ws.close()
 }
 

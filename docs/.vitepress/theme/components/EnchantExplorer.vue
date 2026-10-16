@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import {
   type Enchantment,
   type Lang,
@@ -115,6 +115,149 @@ const isFiltered = computed(
     activeLevel.value > 1,
 )
 
+/** How many filter dimensions are narrowing the list right now. */
+const activeCount = computed(() => {
+  let n = 0
+  if (query.value.trim()) n++
+  if (activeCat.value !== 'all') n++
+  if (activeRarity.value !== 'all') n++
+  if (activeTrait.value !== 'all') n++
+  if (activeLevel.value > 1) n++
+  return n
+})
+
+const activeSummary = computed(() => {
+  const parts: string[] = []
+  if (query.value.trim()) parts.push(`“${query.value.trim()}”`)
+  if (activeCat.value !== 'all') parts.push(catName(activeCat.value))
+  if (activeRarity.value !== 'all') {
+    const r = rarityLabels[activeRarity.value]
+    parts.push(props.lang === 'zh' ? r.zh : r.en)
+  }
+  if (activeTrait.value !== 'all') parts.push(traitLabel(activeTrait.value))
+  if (activeLevel.value > 1) parts.push(`${t.value.level} ${romanOf(activeLevel.value)}`)
+  return parts.join(' · ')
+})
+
+/* ------------------------------------------------------------------
+ * Collapsing toolbar
+ * ------------------------------------------------------------------
+ * `autoCollapsed` follows the scroll position; `override` records an
+ * explicit click. An explicit choice wins over the scroll state until the
+ * page returns to the top, which resets everything back to expanded.
+ *
+ * Folding and unfolding use thresholds `2 × DEAD_ZONE` apart. A single
+ * threshold is not safe here: the fold removes ~260px of page height, and
+ * any scroll adjustment made in response would land on the other side of
+ * the same threshold and flip the state back — an infinite flicker.
+ */
+const DEAD_ZONE = 8
+
+const toolbar = ref<HTMLElement>()
+const sentinel = ref<HTMLElement>()
+const panel = ref<HTMLElement>()
+const panelHeight = ref(520)
+
+const autoCollapsed = ref(false)
+const override = ref<'open' | 'closed' | null>(null)
+
+const expanded = computed(() =>
+  override.value === 'open' ? true : override.value === 'closed' ? false : !autoCollapsed.value,
+)
+
+function toggle() {
+  if (expanded.value) {
+    autoCollapsed.value = true
+    override.value = null
+  } else {
+    override.value = 'open'
+  }
+}
+
+/**
+ * The toolbar's own sticky offset, in pixels.
+ *
+ * Reading `--vp-nav-height` directly does not work: it is declared as `4rem`,
+ * and `parseFloat('4rem')` is 4, not 64. The computed `top` of the toolbar is
+ * already resolved to pixels by the browser, and it is by definition the exact
+ * line the toolbar sticks at, so use that instead.
+ */
+function stickyOffset(): number {
+  const el = toolbar.value
+  if (!el) return 64
+  const value = Number.parseFloat(getComputedStyle(el).top)
+  return Number.isFinite(value) ? value : 64
+}
+
+let queued = false
+function onScroll() {
+  if (queued) return
+  queued = true
+  requestAnimationFrame(() => {
+    queued = false
+    const marker = sentinel.value
+    const el = toolbar.value
+    if (!marker || !el) return
+
+    // On narrow screens the CSS un-sticks the toolbar, so folding it away
+    // would only shift the list for no benefit. Let CSS decide.
+    if (getComputedStyle(el).position !== 'sticky') {
+      autoCollapsed.value = false
+      override.value = null
+      return
+    }
+
+    // `top` is the anchor's distance below the viewport top. It keeps
+    // decreasing as the page scrolls and is not affected by the toolbar's own
+    // height, so it is a stable reference — see the dead band below.
+    const nav = stickyOffset()
+    const top = marker.getBoundingClientRect().top
+
+    if (top <= nav - DEAD_ZONE) {
+      if (autoCollapsed.value) return
+
+      // Folding removes roughly `panelHeight` of page height. If there is less
+      // than that left below the viewport, the browser clamps the scroll
+      // position — and because the height transition runs over ~340ms, that
+      // clamping keeps firing scroll events, each of which can flip the state
+      // back. That produced a permanent flicker on filtered-down pages.
+      // A page that barely scrolls has nothing to gain from folding anyway.
+      const room =
+        document.documentElement.scrollHeight - window.innerHeight - window.scrollY
+      if (room < panelHeight.value + 8) return
+
+      // never fold the panel away while someone is using it
+      const active = document.activeElement
+      if (active && active !== document.body && el.contains(active)) return
+      autoCollapsed.value = true
+      return
+    }
+
+    if (top >= nav + DEAD_ZONE && autoCollapsed.value) {
+      autoCollapsed.value = false
+      override.value = null
+    }
+  })
+}
+
+let observer: ResizeObserver | undefined
+onMounted(() => {
+  onScroll()
+  window.addEventListener('scroll', onScroll, { passive: true })
+  if (panel.value && typeof ResizeObserver !== 'undefined') {
+    observer = new ResizeObserver(() => {
+      if (panel.value) panelHeight.value = panel.value.scrollHeight
+    })
+    observer.observe(panel.value)
+    panelHeight.value = panel.value.scrollHeight
+  }
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', onScroll)
+  observer?.disconnect()
+})
+
 function reset() {
   query.value = ''
   activeCat.value = 'all'
@@ -146,7 +289,52 @@ function catGlyph(id: string) {
 
 <template>
   <div class="fa-explorer">
-    <div class="fa-explorer__toolbar">
+    <div ref="sentinel" class="fa-explorer__sentinel" aria-hidden="true" />
+
+    <div
+      ref="toolbar"
+      class="fa-explorer__toolbar"
+      :class="{ 'is-collapsed': !expanded }"
+      :style="{ '--fa-panel-h': `${panelHeight}px` }"
+    >
+      <!-- compact bar: takes over once the toolbar folds away -->
+      <div class="fa-explorer__compact" :inert="expanded">
+        <button
+          type="button"
+          class="fa-filterbtn"
+          :aria-expanded="expanded"
+          :title="expanded ? t.hideFilters : t.showFilters"
+          @click="toggle"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M3 5h18l-7 8.2V19l-4 2v-7.8L3 5Z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span>{{ t.filters }}</span>
+          <span v-if="activeCount" class="fa-filterbtn__count">{{ activeCount }}</span>
+          <svg
+            class="fa-filterbtn__chev"
+            :class="{ 'is-open': expanded }"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+
+        <span v-if="activeSummary" class="fa-explorer__summary">{{ activeSummary }}</span>
+
+        <button v-if="isFiltered" type="button" class="fa-linkbtn" @click="reset">
+          {{ t.clear }}
+        </button>
+      </div>
+
+      <div ref="panel" class="fa-explorer__panel" :inert="!expanded">
       <div class="fa-explorer__row">
         <div class="fa-field">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -263,6 +451,7 @@ function catGlyph(id: string) {
         <button v-if="isFiltered" type="button" class="fa-linkbtn" @click="reset">
           {{ t.clear }}
         </button>
+      </div>
       </div>
     </div>
 
