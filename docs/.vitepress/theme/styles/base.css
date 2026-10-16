@@ -141,36 +141,92 @@ body {
   opacity: 0.7;
 }
 
-/* ---------- sidebar ---------- */
-.VPSidebar {
-  background: color-mix(in srgb, var(--vp-c-bg) 88%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+/* ---------- sidebar ----------
+ * Two tiers only: a quiet uppercase section label, then the page links.
+ * The links are the thing people actually read, so they get the size;
+ * the labels stay small so the hierarchy reads without any rules or boxes.
+ */
+.Layout .VPSidebar {
+  background: color-mix(in srgb, var(--vp-c-bg) 90%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-right: 1px solid var(--fa-border);
+  padding-right: 1.25rem;
 }
 
+/* section label */
 .VPSidebarItem.level-0 > .item > .text {
   font-family: var(--fa-font-display);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--fa-text-muted);
+  padding-top: 0.15rem;
+  padding-bottom: 0.55rem;
 }
 
-.VPSidebarItem .link:hover .text {
+.VPSidebarItem.level-0 {
+  padding-bottom: 1.9rem;
+}
+
+/* page links */
+.VPSidebarItem.level-1 > .item > .link > .text,
+.VPSidebarItem.level-1 > .item > .text {
+  font-size: 15.5px;
+  line-height: 1.5;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  padding: 0.42rem 0;
+  color: var(--fa-text);
+}
+
+.VPSidebarItem.level-1 > .item > .link:hover > .text,
+.VPSidebarItem.level-1 > .item:hover > .text {
   color: var(--vp-c-brand-1);
+}
+
+.VPSidebarItem.level-1.is-active > .item > .link > .text,
+.VPSidebarItem.level-1.is-active > .item > .text {
+  color: var(--vp-c-brand-1);
+  font-weight: 650;
+}
+
+/* marker: grows in on hover, sits at full height when active */
+.VPSidebarItem.level-1 > .item > .indicator {
+  width: 3px;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  border-radius: 99px;
+  background: linear-gradient(180deg, var(--fa-accent), var(--fa-violet));
+  opacity: 0;
+  transform: scaleY(0.35);
+  transform-origin: center;
+  transition: opacity 0.22s ease, transform 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.VPSidebarItem.level-1 > .item:hover > .indicator {
+  opacity: 0.4;
+  transform: scaleY(0.7);
+}
+
+.VPSidebarItem.level-1.is-active > .item > .indicator {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+/* keep deeper levels (if a section ever grows children) legible too */
+.VPSidebarItem.level-2 .text,
+.VPSidebarItem.level-3 .text,
+.VPSidebarItem.level-4 .text,
+.VPSidebarItem.level-5 .text {
+  font-size: 14.5px;
+  line-height: 1.5;
+  padding: 0.3rem 0;
 }
 
 .VPSidebarItem.is-active > .item .link .text {
   color: var(--vp-c-brand-1);
-  font-weight: 600;
-}
-
-.VPSidebarItem.is-active > .item .indicator {
-  background: linear-gradient(180deg, var(--fa-accent), var(--fa-violet));
-  width: 3px;
-  border-radius: 99px;
 }
 
 /* ---------- document typography ---------- */
@@ -317,17 +373,64 @@ body {
   border-left-color: var(--fa-violet);
 }
 
-/* ---------- outline ---------- */
-.VPDocOutlineItem a.outline-link {
+/* ---------- outline ("本页目录" / "On this page") ----------
+ * Same two-tier treatment as the sidebar: a small muted label above the
+ * entries people actually read. VitePress centres the marker against the
+ * live link and marker heights, so changing the line-height is safe.
+ *
+ * The column is a fixed 14rem upstream, which is too narrow for 15px text
+ * (long English headings were already being ellipsised at 14px), so it is
+ * widened here and the flex parent's cap raised to match.
+ */
+.VPDoc.has-aside .aside {
+  max-width: 21rem;
+}
+
+.VPDoc.has-aside .aside-container,
+.VPDoc.has-aside .aside-curtain {
+  width: 18.5rem;
+}
+
+.VPDocAside .VPDocAsideOutline .outline-title {
+  font-family: var(--fa-font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--fa-text-muted);
+  line-height: 2.4;
+}
+
+.VPDocAside .VPDocOutlineItem a.outline-link {
+  font-size: 15.5px;
+  line-height: 1.45;
+  padding: 0.34rem 0;
+  /* Long headings are real sentences on some pages (the FAQ especially).
+     Wrapping keeps them readable where upstream's ellipsis would cut them. */
+  white-space: normal;
+  overflow: visible;
+  color: var(--fa-text);
   transition: color 0.2s ease;
 }
 
-.VPDocOutlineItem a.outline-link.active {
+.VPDocAside .VPDocOutlineItem a.outline-link.nested {
+  font-size: 15px;
+  padding-left: 1rem;
+}
+
+.VPDocAside .VPDocOutlineItem a.outline-link:hover,
+.VPDocAside .VPDocOutlineItem a.outline-link.active {
   color: var(--vp-c-brand-1);
+}
+
+.VPDocAside .VPDocOutlineItem a.outline-link.active {
   font-weight: 600;
 }
 
-.VPDocOutlineItem .outline-marker {
+.VPDocAside .VPDocOutlineItem .outline-marker {
+  width: 3px;
+  height: 1.3rem;
+  border-radius: 99px;
   background: linear-gradient(180deg, var(--fa-accent), var(--fa-violet));
 }
 

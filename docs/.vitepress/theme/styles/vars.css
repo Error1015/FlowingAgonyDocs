@@ -134,6 +134,8 @@
   --vp-font-family-mono: var(--fa-font-mono);
 
   --vp-layout-max-width: 1520px;
+  /* wider than the 17rem default, so the larger sidebar link text has room */
+  --vp-sidebar-width: 19.5rem;
 
   --vp-button-brand-bg: var(--fa-crimson-600);
   --vp-button-brand-hover-bg: var(--fa-crimson-500);
