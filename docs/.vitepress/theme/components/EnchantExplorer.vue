@@ -142,9 +142,15 @@ const activeSummary = computed(() => {
 /* ------------------------------------------------------------------
  * Collapsing toolbar
  * ------------------------------------------------------------------
- * `autoCollapsed` follows the scroll position; `override` records an
- * explicit click. An explicit choice wins over the scroll state until the
- * page returns to the top, which resets everything back to expanded.
+ * Three states:
+ *   expanded      — at the top of the page, or just below it
+ *   folded        — scrolled past the toolbar
+ *   held open     — the reader clicked the button to bring the panel back
+ *
+ * "Held open" is deliberately not permanent. It survives while the reader
+ * works with the filters, and gives way again as soon as they scroll down
+ * once more, so the panel keeps getting out of the way instead of being
+ * stuck on screen until the page is scrolled back to the top.
  *
  * Folding and unfolding use thresholds `2 × DEAD_ZONE` apart. A single
  * threshold is not safe here: the fold removes ~260px of page height, and
@@ -152,6 +158,8 @@ const activeSummary = computed(() => {
  * the same threshold and flip the state back — an infinite flicker.
  */
 const DEAD_ZONE = 8
+/** How far you must scroll down again before a reopened panel folds away. */
+const REFOLD_AFTER = 28
 
 const toolbar = ref<HTMLElement>()
 const sentinel = ref<HTMLElement>()
@@ -159,18 +167,19 @@ const panel = ref<HTMLElement>()
 const panelHeight = ref(520)
 
 const autoCollapsed = ref(false)
-const override = ref<'open' | 'closed' | null>(null)
+const heldOpen = ref(false)
+/** Scroll position at the moment the panel was reopened. */
+const openedAt = ref(0)
 
-const expanded = computed(() =>
-  override.value === 'open' ? true : override.value === 'closed' ? false : !autoCollapsed.value,
-)
+const expanded = computed(() => heldOpen.value || !autoCollapsed.value)
 
 function toggle() {
   if (expanded.value) {
+    heldOpen.value = false
     autoCollapsed.value = true
-    override.value = null
   } else {
-    override.value = 'open'
+    heldOpen.value = true
+    openedAt.value = window.scrollY
   }
 }
 
@@ -189,6 +198,31 @@ function stickyOffset(): number {
   return Number.isFinite(value) ? value : 64
 }
 
+/**
+ * Whether folding right now is safe and useful.
+ *
+ * Two things stop it:
+ *  - the search box has focus, so folding would yank the field away mid-type;
+ *  - there is less than the panel's height left to scroll, in which case
+ *    folding would clamp the scroll position — and because the height
+ *    transition runs over ~340ms, that clamping keeps firing scroll events,
+ *    each able to flip the state back. On a filtered-down page that produced
+ *    a permanent flicker. Such a page has nothing to gain from folding anyway.
+ */
+function mayFold(): boolean {
+  const active = document.activeElement as HTMLElement | null
+  if (
+    active &&
+    active !== document.body &&
+    active.tagName === 'INPUT' &&
+    panel.value?.contains(active)
+  ) {
+    return false
+  }
+  const room = document.documentElement.scrollHeight - window.innerHeight - window.scrollY
+  return room >= panelHeight.value + 8
+}
+
 let queued = false
 function onScroll() {
   if (queued) return
@@ -203,7 +237,7 @@ function onScroll() {
     // would only shift the list for no benefit. Let CSS decide.
     if (getComputedStyle(el).position !== 'sticky') {
       autoCollapsed.value = false
-      override.value = null
+      heldOpen.value = false
       return
     }
 
@@ -213,30 +247,28 @@ function onScroll() {
     const nav = stickyOffset()
     const top = marker.getBoundingClientRect().top
 
-    if (top <= nav - DEAD_ZONE) {
-      if (autoCollapsed.value) return
-
-      // Folding removes roughly `panelHeight` of page height. If there is less
-      // than that left below the viewport, the browser clamps the scroll
-      // position — and because the height transition runs over ~340ms, that
-      // clamping keeps firing scroll events, each of which can flip the state
-      // back. That produced a permanent flicker on filtered-down pages.
-      // A page that barely scrolls has nothing to gain from folding anyway.
-      const room =
-        document.documentElement.scrollHeight - window.innerHeight - window.scrollY
-      if (room < panelHeight.value + 8) return
-
-      // never fold the panel away while someone is using it
-      const active = document.activeElement
-      if (active && active !== document.body && el.contains(active)) return
-      autoCollapsed.value = true
+    // Back above the fold line: return to the plain automatic behaviour.
+    if (top >= nav + DEAD_ZONE) {
+      autoCollapsed.value = false
+      heldOpen.value = false
       return
     }
 
-    if (top >= nav + DEAD_ZONE && autoCollapsed.value) {
-      autoCollapsed.value = false
-      override.value = null
+    // Inside the dead band: keep whatever state we are in.
+    if (top > nav - DEAD_ZONE) return
+
+    // Clearly scrolled past the toolbar.
+    if (heldOpen.value) {
+      if (window.scrollY > openedAt.value + REFOLD_AFTER && mayFold()) {
+        heldOpen.value = false
+        autoCollapsed.value = true
+      }
+      return
     }
+
+    if (autoCollapsed.value) return
+    if (!mayFold()) return
+    autoCollapsed.value = true
   })
 }
 
